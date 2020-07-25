@@ -1,0 +1,65 @@
+/*----------------- Colores UTN -----------------*/
+.coloresUTN{
+    Azul_UTN:#1B3069;
+    Celeste_UTN:#89C1E0;
+    Naranja_UTN:#F87600;
+    Gris_UTN:#DBDBDB;
+}
+
+/*----------------- Page Content -----------------*/
+#Header {
+    position: relative;
+    background-color: white;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#Footer {
+    position: relative;
+    background-color: #1B3069;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#leftSide {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#rightSide {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+        height: 100%;
+        background: #DBDBDB;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+body{
+    background-color: #DBDBDB;
+}
+
+
+
+
+
+
+

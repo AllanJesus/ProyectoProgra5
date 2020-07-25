@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+
+    <h:head>
+        <title>Solicitud Aspirante</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+        <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
+    </h:head>
+    
+    <!-- Header -->
+    <h:body>
+        <h:form>
+            <div id="Header">
+                <ul>
+                    <li><a href="aMenuAspirante.xhtml">Inicio</a></li>
+                    <li><a href="" class="active" >Solicitud Aspirante</a></li>
+                    <li><a href="aReportes.xhtml">Reportes</a></li>
+                    <li><a href="">Datos Personales</a></li>
+                    <li id="Salir"><a href="login.xhtml">Salir</a></li>
+                </ul>
+            </div>
+            <!-- /Header -->
+
+            <!-- Content -->
+            <div class="center_content">
+                <div style="margin-left:  90%;">
+                    <small>Nombre Usuario</small>
+                </div>
+                <br/>
+
+                <div>
+                    <h4 class="menuBanner">Solicitud Aspirante</h4>
+                </div>
+                
+                <div class="form-group">
+                    <h:outputLabel value="Nota Presentacion de Bachillerato :"></h:outputLabel>
+                    <h:inputText p:placeholder="Nota Presentacion de Bachillerato "></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Acciones Afirmativas :"></h:outputLabel>
+                    <h:commandButton value="Agregar"></h:commandButton>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Calcular Promedio Admision"></h:outputLabel>
+                    <h:commandButton value="Calcular"></h:commandButton>
+                    <h:inputText disabled="true" p:placeholder="Promedio Admision"></h:inputText>
+                </div>
+            </div>
+            <!-- /Content -->
+
+            <!-- Footer -->
+            
+            <!-- /Footer -->
+        </h:form>
+    </h:body>
+</html>

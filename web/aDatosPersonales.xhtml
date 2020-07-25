@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+
+    <h:head>
+        <title>Datos Personales</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+        <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
+    </h:head>
+    
+    <!-- Header -->
+    <h:body>
+        <h:form>
+            <div id="Header">
+                <ul>
+                    <li><a href="aMenuAspirante.xhtml">Inicio</a></li>
+                    <li><a href="aSolicitudAspirante.xhtml">Solicitud Aspirante</a></li>
+                    <li><a href="aReportes.xhtml">Reportes</a></li>
+                    <li><a href="" class="active">Datos Personales</a></li>
+                    <li id="Salir"><a href="login.xhtml">Salir</a></li>
+                </ul>
+            </div>
+            <!-- /Header -->
+
+            <!-- Content -->
+            <div class="center_content">
+                <div style="margin-left:  90%;">
+                    <h:outputLabel value="Nombre Usuario"></h:outputLabel>
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    <h4 class="menuBanner">Datos Personales</h4>
+                </div>
+                
+                <div>
+                    <h:outputLabel value="Identificacion :"></h:outputLabel>
+                    <h:inputText p:placeholder="Identificacion "></h:inputText>
+                    <h:outputLabel value="Tipo Identificacion :"></h:outputLabel>
+                    <h:inputText p:placeholder="Tipo Identificacion "></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Nombre Completo :"></h:outputLabel>
+                    <h:inputText p:placeholder="Nombre Completo "></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Primer Apellido :"></h:outputLabel>
+                    <h:inputText p:placeholder="Primer Apellido"></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Segundo Apellido :"></h:outputLabel>
+                    <h:inputText p:placeholder="Segundo Apellido"></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Fecha Nacimiento"></h:outputLabel>
+                    <h:inputText p:placeholder="Fecha Nacimiento"></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Correo :"></h:outputLabel>
+                    <h:inputText p:placeholder="Correo"></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    <h:outputLabel value="Direcciones"></h:outputLabel>
+                    <h:inputText p:placeholder="Provincia"></h:inputText>
+                    <h:inputText p:placeholder="Canton"></h:inputText>
+                    <h:inputText p:placeholder="Dsitrito"></h:inputText>
+                    <h:inputText p:placeholder="Barrio"></h:inputText>
+                    <h:inputText p:placeholder="Otras Señas"></h:inputText>
+                    <br/>
+                    <br/>
+                    
+                    
+                    
+                    <h:commandButton value="Guardar"></h:commandButton>
+                </div>
+            </div>
+            <!-- /Content -->
+
+            <!-- Footer -->
+            
+            <!-- /Footer -->
+        </h:form>
+    </h:body>
+</html>
+
+

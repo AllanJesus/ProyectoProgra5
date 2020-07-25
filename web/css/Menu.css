@@ -1,0 +1,61 @@
+/*----------------- Colores UTN -----------------*/
+.coloresUTN{
+    Azul_UTN:#1B3069;
+    Celeste_UTN:#89C1E0;
+    Naranja_UTN:#F87600;
+    Gris_UTN:#DBDBDB;
+}
+
+/*----------------- NavBars -----------------*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1B3069;
+    border-radius: 10px 10px 10px 10px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: #DBDBDB;
+    text-decoration: none;
+    background-color: #DBDBDB;
+    color: #1B3069;
+}
+
+.active {
+    background-color: #F87600;
+}
+
+#Salir {
+    float: right;
+    background-color: red;
+}
+
+#salir li a:hover{
+    color: #DBDBDB;
+    text-decoration: none;
+}
+
+/*----------------- Contenido -----------------*/
+
+.menuBanner{
+    text-align: center ;
+}
+
+
+
+
+
