@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 
 
@@ -39,6 +40,40 @@
                 <div >
                     <h4 class="menuBanner">Consultar Solicitudes</h4>
                 </div>
+                
+                 <div>
+                    <h:dataTable>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo Identidad"/>
+                            </f:facet>
+                            <h:outputText />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Identidad"/>
+                            </f:facet>
+                            <h:outputText />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText />
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText />
+                        </h:column>
+
+                    </h:dataTable>
+                 </div>
             </div>
             <!-- /Content -->
 
