@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 
 
@@ -74,10 +75,31 @@
                     <br/>
                     
                     <h:outputLabel value="Direcciones"></h:outputLabel>
-                    <h:inputText p:placeholder="Provincia"></h:inputText>
-                    <h:inputText p:placeholder="Canton"></h:inputText>
-                    <h:inputText p:placeholder="Dsitrito"></h:inputText>
-                    <h:inputText p:placeholder="Barrio"></h:inputText>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Provincia"></h:outputLabel>
+                    <h:selectOneMenu label="pro"  >
+                        <f:selectItems />
+                    </h:selectOneMenu>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Canton"></h:outputLabel>
+                    <h:selectOneMenu label="pro" >
+                        <f:selectItems />
+                    </h:selectOneMenu>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Distrito"></h:outputLabel>
+                    <h:selectOneMenu label="pro" >
+                        <f:selectItems />
+                    </h:selectOneMenu>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Barrio"></h:outputLabel>
+                    <h:selectOneMenu label="pro" >
+                        <f:selectItems/>
+                    </h:selectOneMenu>
+                    
                     <h:inputText p:placeholder="Otras Señas"></h:inputText>
                     <br/>
                     <br/>
