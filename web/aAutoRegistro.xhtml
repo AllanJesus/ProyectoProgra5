@@ -41,11 +41,11 @@
 
                         <div class="form-group">
                             <h:outputLabel value="Correo"></h:outputLabel>
-                            <h:inputSecret class="form-control" p:placeholder="Ingresa su correo"  autocomplete="off" value="#{beanLogin.correo}" ></h:inputSecret>
+                            <h:inputText class="form-control" p:placeholder="Ingresa su correo"  autocomplete="off" value="#{beanLogin.correo}" ></h:inputText>
                         </div>
 
                         <h:commandButton class="btn btn-primary btn-block mb-4" value="Registrarse" action="#{beanLogin.validarAutoRegistro()}" ></h:commandButton> 
-                        <small class="form-text text-muted">Ya tienes una cuenta? <a href="IniciaSesion.xhtml" class="text-success">Ingresa Aqui</a></small>
+                        <small class="form-text text-muted">Ya tienes una cuenta? <a href="login.xhtml" class="text-success">Ingresa Aqui</a></small>
                     </h:form>
                 </div>
             </div>
