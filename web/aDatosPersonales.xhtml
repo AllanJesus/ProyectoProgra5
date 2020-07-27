@@ -36,77 +36,109 @@
                     <h:outputLabel value="Nombre Usuario"></h:outputLabel>
                 </div>
                 <br/>
+                <h:outputLabel value="#{beanDatoPersonal.mensajeError}" class=" text-center font-weight-bold text-danger"></h:outputLabel>
                 <br/>
                 <div>
                     <h4 class="menuBanner">Datos Personales</h4>
                 </div>
                 
                 <div>
-                    <h:outputLabel value="Identificacion :"></h:outputLabel>
-                    <h:inputText p:placeholder="Identificacion "></h:inputText>
+                    <h:outputLabel value="Identificacion :" ></h:outputLabel>
+                    <h:inputText p:placeholder="Identificacion " value = "#{beanDatoPersonal.identificacion}" ></h:inputText>
                     <h:outputLabel value="Tipo Identificacion :"></h:outputLabel>
-                    <h:inputText p:placeholder="Tipo Identificacion "></h:inputText>
+                    <h:inputText p:placeholder="Tipo Identificacion " value="#{beanDatoPersonal.tipoIdentificacion}" ></h:inputText>
                     <br/>
                     <br/>
                     
                     <h:outputLabel value="Nombre Completo :"></h:outputLabel>
-                    <h:inputText p:placeholder="Nombre Completo "></h:inputText>
+                    <h:inputText p:placeholder="Nombre Completo " value="#{beanDatoPersonal.nombre}"></h:inputText>
                     <br/>
                     <br/>
                     
                     <h:outputLabel value="Primer Apellido :"></h:outputLabel>
-                    <h:inputText p:placeholder="Primer Apellido"></h:inputText>
+                    <h:inputText p:placeholder="Primer Apellido" value="#{beanDatoPersonal.primerApellido}"></h:inputText>
                     <br/>
                     <br/>
                     
                     <h:outputLabel value="Segundo Apellido :"></h:outputLabel>
-                    <h:inputText p:placeholder="Segundo Apellido"></h:inputText>
+                    <h:inputText p:placeholder="Segundo Apellido" value="#{beanDatoPersonal.segundoApellido}"></h:inputText>
                     <br/>
                     <br/>
                     
                     <h:outputLabel value="Fecha Nacimiento"></h:outputLabel>
-                    <h:inputText p:placeholder="Fecha Nacimiento"></h:inputText>
+                    <h:inputText p:placeholder="Fecha Nacimiento" value="#{beanDatoPersonal.fechaNacimiento}"></h:inputText>
                     <br/>
                     <br/>
                     
                     <h:outputLabel value="Correo :"></h:outputLabel>
-                    <h:inputText p:placeholder="Correo"></h:inputText>
+                    <h:inputText p:placeholder="Correo" value="#{beanDatoPersonal.correo}"></h:inputText>
                     <br/>
                     <br/>
                     
                     <h:outputLabel value="Direcciones"></h:outputLabel>
                     <br/>
                     <br/>
-                    <h:outputLabel value="Provincia"></h:outputLabel>
-                    <h:selectOneMenu label="pro"  >
-                        <f:selectItems />
+                    <h:outputLabel value="Provincia" ></h:outputLabel>
+                    <h:selectOneMenu   label = "pro" id="provincia">
+                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
+                        <f:selectItem itemValue="San Jose" ></f:selectItem>
+                        <f:selectItem itemValue="Alajuela" ></f:selectItem>
+                        <f:selectItem itemValue="Heredia" ></f:selectItem>
+                        <f:selectItem itemValue="Cartago" ></f:selectItem>
+                        <f:selectItem itemValue="Puntarenas" ></f:selectItem>
+                        <f:selectItem itemValue="Limon" ></f:selectItem>
+                        <f:selectItem itemValue="Guanacaste" ></f:selectItem>
+                        
                     </h:selectOneMenu>
+                    <h:message for="Provincia" errorStyle="color:red"/>
                     <br/>
                     <br/>
                     <h:outputLabel value="Canton"></h:outputLabel>
-                    <h:selectOneMenu label="pro" >
-                        <f:selectItems />
+                    <h:selectOneMenu label="can" >
+                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
+                        <f:selectItem itemValue="Grecia" ></f:selectItem>
+                        <f:selectItem itemValue="Alajuela" ></f:selectItem>
+                        <f:selectItem itemValue="Palmares" ></f:selectItem>
+
                     </h:selectOneMenu>
                     <br/>
                     <br/>
                     <h:outputLabel value="Distrito"></h:outputLabel>
-                    <h:selectOneMenu label="pro" >
-                        <f:selectItems />
+                    <h:selectOneMenu label="dis" >
+                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
+                       <f:selectItem itemValue="San Rafel" ></f:selectItem>
+                        <f:selectItem itemValue="La Guacima" ></f:selectItem>
+                        <f:selectItem itemValue="San Antonio" ></f:selectItem>
+                
                     </h:selectOneMenu>
                     <br/>
                     <br/>
                     <h:outputLabel value="Barrio"></h:outputLabel>
-                    <h:selectOneMenu label="pro" >
-                        <f:selectItems/>
+                    <h:selectOneMenu label="bar" >
+                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
+                        <f:selectItem itemValue="El Roble" ></f:selectItem>
+                        <f:selectItem itemValue="Rincon Herrera" ></f:selectItem>
+                        <f:selectItem itemValue="Calle Monge" ></f:selectItem>
+                        <f:selectItem itemValue="Lagunilla" ></f:selectItem>
+
                     </h:selectOneMenu>
-                    
-                    <h:inputText p:placeholder="Otras Señas"></h:inputText>
                     <br/>
                     <br/>
+                    <h:outputLabel value="Otras Señas"></h:outputLabel>
+                    <h:inputText p:placeholder="Otras Señas"  value="#{beanDatoPersonal.otras}"></h:inputText>
+                    <br/>
+                    <br/>
+                    <h:commandButton  value="Validar datos" actionListener="#{beanDatoPersonal.validarDatosPersonales()}"></h:commandButton>
+                    <br/>
+                    <br/>
+                    <h:commandButton  value="Aceptar" actionListener="#{beanDatoPersonal.guardar()}"></h:commandButton>
+                    <h:commandButton  value="Cancelar" actionListener="#{beanDatoPersonal.limpiar()}"></h:commandButton>
+                    <br/>
+                    <br/>
+         
+                    <h:outputLabel value="Resultado:"></h:outputLabel>
+                    <h:inputText size="100" value="#{beanDatoPersonal.resultado}"></h:inputText>
                     
-                    
-                    
-                    <h:commandButton value="Guardar"></h:commandButton>
                 </div>
             </div>
             <!-- /Content -->
@@ -117,5 +149,3 @@
         </h:form>
     </h:body>
 </html>
-
-

@@ -10,5 +10,6 @@ package model;
  * @author kevin
  */
 public class Persona {
+
     
 }
