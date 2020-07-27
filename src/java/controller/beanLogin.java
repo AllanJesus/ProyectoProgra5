@@ -34,7 +34,9 @@ public class beanLogin implements Serializable {
     String apellido2;
 
     ////////////////////////////Patrones para Validar Login \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    Pattern matchesCaracterEspecial = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE); //Validar Caracteres Especiales
+    Pattern matchesIdentidad = Pattern.compile("[0-9]");
+    
+    Pattern matchesCaracterEspecial = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE); //Validar Caracteres Especiales
     Pattern matchesMayuscula = Pattern.compile("[A-Z ]"); //Validar Mayuscula 
     Pattern matchesMinuscula = Pattern.compile("[a-z ]"); //Validar minuscula
     Pattern matchesNumero = Pattern.compile("[0-9 ]"); //Validar Numero
@@ -59,6 +61,7 @@ public class beanLogin implements Serializable {
 //        if (tipoUsuario.equals("Registro")) {
 //            return "rMenuRegistro.xhtml";
 //        }
+        mensajeError = "";
         return "aMenuAspirante.xhtml";
 //        return "aAutoRegistro.xhtml";
 //        return "aRegistroConstrasena.xhtml";
@@ -76,14 +79,32 @@ public class beanLogin implements Serializable {
 
         if (this.contrasena.equals("")) {
             return true;
-        }
+        }  
+        
         return false;
     }   
     
+    
+    
 ////////////////////////////Validacion AutoRegistro ////////////////////////////
     public String validarAutoRegistro(){
-        if (validacionIdentificacion()) {
+        if (validacionIdentificacionVacio()) {
             mensajeError = "Debe escribir una identificacion";
+            return mensajeError;
+        }
+        
+        if (validacionIdentificacionValida()) {
+            mensajeError = "La identificacion no puede contener letras ni caracteres especiales";
+            return mensajeError;
+        }       
+        
+        if (validacionNombreVacio()) {
+            mensajeError = "El campo de Nombre no puede estar vacio";
+            return mensajeError;
+        }
+        
+        if (validacionApellidosVacio()) {
+            mensajeError = "Debe escribir ambos apellidos";
             return mensajeError;
         }
         
@@ -97,36 +118,34 @@ public class beanLogin implements Serializable {
             return mensajeError;
         }
         
-        if (validacionNombreVacio()) {
-            mensajeError = "El campo de Nombre no puede estar vacio";
-            return mensajeError;
-        }
-        
-        if (validacionApellidosVacio()) {
-            mensajeError = "Debe escribir ambos apellidos";
-            return mensajeError;
-        }
-        
+        mensajeError = "";
         return "aMensajeRegistro";
     }
     
 ////////////////////////////Patrones para Validar AutoRegistro////////////////////////////
-private boolean validacionIdentificacion() { // Valida Usuario en Blanco    
+private boolean validacionIdentificacionVacio() { // Valida Usuario en Blanco    
         if ((this.identificacion.matches(""))) {
             return true;
         }
         return false;
     }
 
+private boolean validacionIdentificacionValida() { // Valida Usuario en Blanco    
+        if (!(this.matchesIdentidad.matcher(identificacion).find())) {
+            return true;
+        }
+        return false;
+    }
+
 private boolean validacionCorreoVacio() { // Valida Usuario en Blanco    
-        if ((this.usuario.matches(""))) {
+        if ((this.correo.matches(""))) {
             return true;
         }
         return false;
     }
 
 private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco    
-        if (matchesCorreo.matcher(this.correo).find()) {
+        if (!(matchesCorreo.matcher(this.correo).find())) {
             return true;
         }
         return false;
@@ -155,6 +174,11 @@ private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco
             return mensajeError;
         }
         
+        if (validacionContrasena1Vacio()) {
+            mensajeError = "Debe escribir la Contraseñas en ambos campos";
+            return mensajeError;
+        }
+        
         if (validacionNumeros()) {
             mensajeError = "La Contraseñas debe tener por lo menos un numero";
             return mensajeError;
@@ -173,18 +197,14 @@ private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco
         if (validacionMinusculas()) {
             mensajeError = "La Contraseñas debe tener por lo menos una letra minuscula";
             return mensajeError;
-        }      
-        
-        if (validacionContrasenaVacio()) {
-            mensajeError = "Debe Escribir amabas Contraseñas";
-            return mensajeError;
-        }      
+        }
         
         if (validacionConstrasenasIguales()) {
             mensajeError = "Las contrasenas no coiciden";
             return mensajeError;
         }      
         
+        mensajeError = "";
         return "aMensajeConstrasena.xhtml";
         
     }
