@@ -17,25 +17,27 @@
                     <h:form class="bg-white p-5" id="myFrom">
                         <h1 class="display-4 text-center mb-4 mt-0">Iniciar Sesion</h1>
 
+                        <h:outputLabel value="#{beanLogin.mensajeError}" class=" text-center font-weight-bold text-danger"></h:outputLabel>
+                        
                         <div class="form-group">
                             <h:outputLabel value="Numero de Identificacion"></h:outputLabel>
-                            <h:inputText class="form-control" p:placeholder="Ingresa tu Cedula" ></h:inputText>
+                            <h:inputText class="form-control" p:placeholder="Ingresa tu Cedula" value="#{beanLogin.usuario}"></h:inputText>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel value="Contrasena"></h:outputLabel>
-                            <h:inputSecret class="form-control" p:placeholder="Ingresa una Contraseña" ></h:inputSecret>
+                            <h:inputSecret class="form-control" p:placeholder="Ingresa una Contraseña" value="#{beanLogin.contrasena}"></h:inputSecret>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel value="Tipo Usuario"></h:outputLabel>
-                            <h:selectOneMenu class="form-control">
+                            <h:selectOneMenu class="form-control" value="#{beanLogin.tipoUsuario}">
                                 <f:selectItem itemLabel="Aspirante" itemValue="Aspirante" />
                                 <f:selectItem itemLabel="Registro" itemValue="Registro" />
                             </h:selectOneMenu>
                         </div>
 
-                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Ingresar" ></h:commandButton> 
+                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Ingresar" action="#{beanLogin.validacionLogin()}" ></h:commandButton> 
                         <small class="form-text text-muted">Todavia no tienes una cuenta? <a href="paginaRegistro.xhtml" class="text-success">Ingresa Aqui</a></small>
                         <br></br>
                     </h:form>
