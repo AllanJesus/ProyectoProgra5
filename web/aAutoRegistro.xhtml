@@ -16,32 +16,35 @@
                 <div class="col-lg-6 col-md-7">
                     <h:form class="bg-white px-5 pb-5 pt-3 pt-2">
                         <h1 class="display-4 text-center mb-4 mt-0">Registrate</h1>
+                        
+                        <h:outputLabel value="#{beanLogin.mensajeError}" class=" text-center font-weight-bold text-danger"></h:outputLabel>
+                        
                         <div class="form-group">
                             <h:outputLabel value="Identificacion"></h:outputLabel>
-                            <h:inputText class="form-control" p:placeholder="Ingresa tu Identificacion" ></h:inputText>
+                            <h:inputText class="form-control" p:placeholder="Ingresa tu Identificacion" value="#{beanLogin.identificacion}" ></h:inputText>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel value="Nombre Completo"></h:outputLabel>
-                            <h:inputText class="form-control" p:placeholder="Ingresa tu Nombre" ></h:inputText>
+                            <h:inputText class="form-control" p:placeholder="Ingresa tu Nombre" value="#{beanLogin.nombre}" ></h:inputText>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel value="Primer Apellido"></h:outputLabel>
-                            <h:inputText class="form-control" p:placeholder="Ingresa tu Nombre" ></h:inputText>
+                            <h:inputText class="form-control" p:placeholder="Ingresa tu primer Apellido" value="#{beanLogin.apellido1}" ></h:inputText>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel value="Segundo Apellido"></h:outputLabel>
-                            <h:inputText class="form-control" p:placeholder="Ingresa tu Nombre" ></h:inputText>
+                            <h:inputText class="form-control" p:placeholder="Ingresa tu Segundo Apellido" value="#{beanLogin.apellido2}" ></h:inputText>
                         </div>
 
                         <div class="form-group">
                             <h:outputLabel value="Correo"></h:outputLabel>
-                            <h:inputSecret class="form-control" p:placeholder="Ingresa su correo"  autocomplete="off"></h:inputSecret>
+                            <h:inputSecret class="form-control" p:placeholder="Ingresa su correo"  autocomplete="off" value="#{beanLogin.correo}" ></h:inputSecret>
                         </div>
 
-                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Registrarse" ></h:commandButton> 
+                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Registrarse" action="#{beanLogin.validarAutoRegistro()}" ></h:commandButton> 
                         <small class="form-text text-muted">Ya tienes una cuenta? <a href="IniciaSesion.xhtml" class="text-success">Ingresa Aqui</a></small>
                     </h:form>
                 </div>
