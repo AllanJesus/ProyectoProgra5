@@ -9,15 +9,15 @@ package model;
  *
  * @author kevin
  */
-public class Admision {
-
+public class Usuario {
+    
     Persona persona;
-    float nota;
-    float promedio;
+    String correo;
+    String contrasena;
+    int codigo;
     boolean estado;
 
-    public Admision() {
-
+    public Usuario() {
     }
 
     public Persona getPersona() {
@@ -28,20 +28,28 @@ public class Admision {
         this.persona = persona;
     }
 
-    public float getNota() {
-        return nota;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setNota(float nota) {
-        this.nota = nota;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public float getPromedio() {
-        return promedio;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPromedio(float promedio) {
-        this.promedio = promedio;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public boolean isEstado() {
@@ -51,5 +59,7 @@ public class Admision {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
+    
+    
+    
 }

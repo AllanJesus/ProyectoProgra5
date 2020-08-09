@@ -11,8 +11,8 @@ import java.sql.Date;
  *
  * @author kevin
  */
-public class Persona {
-
+public class PersonaDB {
+    
     int identificacion;
     String Nombre;
     String apellido1;
@@ -21,7 +21,7 @@ public class Persona {
     int edad;
     String correo;
 
-    public Persona() {
+    public PersonaDB() {
     }
 
     public int getIdentificacion() {
@@ -79,7 +79,6 @@ public class Persona {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
     
     
     
