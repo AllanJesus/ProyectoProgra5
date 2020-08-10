@@ -9,15 +9,14 @@ package model;
  *
  * @author kevin
  */
-public class Admision {
-
+public class AdmisionDB {
+    
     Persona persona;
     float nota;
     float promedio;
     boolean estado;
 
-    public Admision() {
-
+    public AdmisionDB() {
     }
 
     public Persona getPersona() {
@@ -51,5 +50,7 @@ public class Admision {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
+    
+    
+    
 }

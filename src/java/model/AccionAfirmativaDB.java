@@ -5,15 +5,11 @@
  */
 package model;
 
-import java.util.LinkedList;
-import java.util.List;
-import javax.faces.model.SelectItem;
-
 /**
  *
  * @author kevin
  */
-public class AccionAfirmativa {
+public class AccionAfirmativaDB {
     
     int puntos;
     String poblaciones;
@@ -21,8 +17,7 @@ public class AccionAfirmativa {
     String lugarPresentar;
     String descripcion;
 
-    public AccionAfirmativa() {
-
+    public AccionAfirmativaDB() {
     }
 
     public int getPuntos() {
