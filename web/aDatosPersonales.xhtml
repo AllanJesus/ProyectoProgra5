@@ -79,55 +79,36 @@
                     <br/>
                     <br/>
                     <h:outputLabel value="Provincia" ></h:outputLabel>
-                    <h:selectOneMenu   label = "pro" id="provincia">
-                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
-                        <f:selectItem itemValue="San Jose" ></f:selectItem>
-                        <f:selectItem itemValue="Alajuela" ></f:selectItem>
-                        <f:selectItem itemValue="Heredia" ></f:selectItem>
-                        <f:selectItem itemValue="Cartago" ></f:selectItem>
-                        <f:selectItem itemValue="Puntarenas" ></f:selectItem>
-                        <f:selectItem itemValue="Limon" ></f:selectItem>
-                        <f:selectItem itemValue="Guanacaste" ></f:selectItem>
-                        
+                    <h:selectOneMenu label="pro" value="#{beanProvincias.cod_provincia}" id="pro">
+                        <f:selectItems value="#{beanProvincias.listaPro}"/>
+                        <f:ajax event="change" listener="#{beanProvincias.getListaCan()}" render="can" execute="@this"/>
+                        <f:ajax event="change" listener="#{beanProvincias.getListaDis()}" render="dis" execute="@this"/>
+                        <f:ajax event="change" listener="#{beanProvincias.getListaBar()}" render="bar" execute="@this"/>
                     </h:selectOneMenu>
                     <h:message for="Provincia" errorStyle="color:red"/>
                     <br/>
                     <br/>
                     <h:outputLabel value="Canton"></h:outputLabel>
-                    <h:selectOneMenu label="can" >
-                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
-                        <f:selectItem itemValue="Grecia" ></f:selectItem>
-                        <f:selectItem itemValue="Alajuela" ></f:selectItem>
-                        <f:selectItem itemValue="Palmares" ></f:selectItem>
-
+                    <h:selectOneMenu label="can" value="#{beanProvincias.cod_canton}" id="can">
+                        <f:selectItems value="#{beanProvincias.listaCan}"/>
+                        <f:ajax event="change" listener="#{beanProvincias.getListaDis()}" render="dis" execute="@this"/>
                     </h:selectOneMenu>
                     <br/>
                     <br/>
                     <h:outputLabel value="Distrito"></h:outputLabel>
-                    <h:selectOneMenu label="dis" >
-                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
-                       <f:selectItem itemValue="San Rafel" ></f:selectItem>
-                        <f:selectItem itemValue="La Guacima" ></f:selectItem>
-                        <f:selectItem itemValue="San Antonio" ></f:selectItem>
-                
+                    <h:selectOneMenu label="dis" value="#{beanProvincias.cod_distrito}" id="dis">
+                        <f:selectItems value="#{beanProvincias.listaDis}"/>
+                        <f:ajax event="change" listener="#{beanProvincias.getListaBar()}" render="bar" execute="@this"/>
                     </h:selectOneMenu>
                     <br/>
                     <br/>
                     <h:outputLabel value="Barrio"></h:outputLabel>
-                    <h:selectOneMenu label="bar" >
-                        <f:selectItem itemValue="Seleccione Uno" ></f:selectItem>
-                        <f:selectItem itemValue="El Roble" ></f:selectItem>
-                        <f:selectItem itemValue="Rincon Herrera" ></f:selectItem>
-                        <f:selectItem itemValue="Calle Monge" ></f:selectItem>
-                        <f:selectItem itemValue="Lagunilla" ></f:selectItem>
-
+                     <h:selectOneMenu label="dis" value="#{beanProvincias.cod_barrio}" id="bar">
+                        <f:selectItems value="#{beanProvincias.listaBar}"/>
                     </h:selectOneMenu>
                     <br/>
                     <br/>
-                    <h:outputLabel value="Otras Señas"></h:outputLabel>
-                    <h:inputText p:placeholder="Otras Señas"  value="#{beanDatoPersonal.otras}"></h:inputText>
-                    <br/>
-                    <br/>
+                    
                     <h:commandButton  value="Validar datos" actionListener="#{beanDatoPersonal.validarDatosPersonales()}"></h:commandButton>
                     <br/>
                     <br/>
