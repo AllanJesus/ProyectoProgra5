@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 
     <h:head>
@@ -14,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"></link>
         <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
     </h:head>
-    
+
     <!-- Header -->
     <h:body>
         <h:form>
@@ -23,9 +22,9 @@
                     <li><a href="aInicioAspirante.xhtml">Inicio</a></li>
                     <li><a href="aDatosPersonales.xhtml">Datos Personales</a></li>
                     <li><a href="aRegistroNotaBachillerato.xhtml">Resgistro Nota Presentacion</a></li>
-                    <li><a href="" class="active">Registro de Acciones Afirmativas</a></li>
-                    <li><a href="aCalculoPromedio.xhtml">Calculo Promedio</a></li>
-                    <li><a href="aConsultaEstadoAdmision.xhtml">Consulta Estado de Admision</a></li>
+                    <li><a href="aAccionesAfirmativas.xhtml">Registro de Acciones Afirmativas</a></li>
+                    <li><a href="aCalculoPromedio.xhtml" >Calculo Promedio</a></li>
+                    <li><a href="aConsultaEstadoAdmision.xhtml" class="active">Consulta Estado de Admision</a></li>
 
                     <li id="Salir"><a href="login.xhtml">Salir</a></li>
                 </ul>
@@ -40,32 +39,17 @@
                 <br/>
 
                 <div >
-                    <h4 class="menuBanner">Accones Afirmativas</h4>
+                    <h4 class="menuBanner">Estado de Admision</h4>
+                    
                 </div>
-                
-                <div>
-                    <h:dataTable >
-
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Descripcion"/>
-                    </f:facet>
-                    <h:outputText/>
-                </h:column>
-                        
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Puntos"/>
-                    </f:facet>
-                    <h:outputText />
-                </h:column>
-
-            </h:dataTable>
-                </div>
-
             </div>
             <!-- /Content -->
-            
+
+            <!-- prueba -->
+
+            <!-- Footer -->
+
+            <!-- /Footer -->
         </h:form>
     </h:body>
 </html>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+[17:00, 16/8/2020] Kehin Pniagua: <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -13,16 +13,19 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"></link>
         <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
     </h:head>
-    
+
     <!-- Header -->
     <h:body>
         <h:form>
             <div id="Header">
                 <ul>
-                    <li><a href="" class="active">Inicio</a></li>
-                    <li><a href="aSolicitudAspirante.xhtml">Solicitud Aspirante</a></li>
-                    <li><a href="aReportes.xhtml">Reportes</a></li>
+                    <li><a href="aInicioAspirante.xhtml">Inicio</a></li>
                     <li><a href="aDatosPersonales.xhtml">Datos Personales</a></li>
+                    <li><a href="aRegistroNotaBachillerato.xhtml">Resgistro Nota Presentacion</a></li>
+                    <li><a href="aAccionesAfirmativas.xhtml">Registro de Acciones Afirmativas</a></li>
+                    <li><a href="" class="active">Calculo Promedio</a></li>
+                    <li><a href="aConsultaEstadoAdmision.xhtml">Consulta Estado de Admision</a></li>
+
                     <li id="Salir"><a href="login.xhtml">Salir</a></li>
                 </ul>
             </div>
@@ -36,15 +39,28 @@
                 <br/>
 
                 <div >
-                    <h4 class="menuBanner">Bienvenido</h4>
+                    <h4 class="menuBanner">Calcular Promedio de Admision</h4>
+                    <div style="margin-left: 35%">
+                        <h:outputLabel value="Nota Presentacion de Bachillerato"></h:outputLabel>
+                        <h:inputText readonly="true" style="margin-left: 1.5%"></h:inputText>
+                        <br/>
+                        <br/>                    
+                        <h:outputLabel value="Puntos de Acciones Afirmativas"></h:outputLabel>
+                        <h:inputText readonly="true" style="margin-left: 3.3%"></h:inputText>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div style="margin-left: 50%">
+                        <h:commandButton value="Calcular"></h:commandButton>
+                    </div>
                 </div>
             </div>
             <!-- /Content -->
-            
-             <!-- prueba -->
+
+            <!-- prueba -->
 
             <!-- Footer -->
-            
+
             <!-- /Footer -->
         </h:form>
     </h:body>
