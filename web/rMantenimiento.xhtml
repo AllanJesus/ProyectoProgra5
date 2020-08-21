@@ -1,52 +1,72 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-
-
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Mantenimiento</title>
+        <title>Mantenimiento de Acciones Afirmacion</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
-        <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/style_1.css"></link>
         <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
     </h:head>
-    
-    <!-- Header -->
     <h:body>
         <h:form>
             <div id="Header">
                 <ul>
-                    <li><a href="rMenuRegistro.xhtml">Inicio</a></li>
-                    <li><a href="rConsultaSolicitudes.xhtml">Consultar Solicitudes de Admision</a></li>                    
-                    <li><a href="" class="active">Mantenimiento de Acciones Afirmativas</a></li>
-                    <li><a href="rReportes.xhtml">Reportes de Aspirantes</a></li>
+                    <li><a href="aInicioAspirante.xhtml">Inicio</a></li>
+                    <li><a href="" class="active">Datos Personales</a></li>
+                    <li><a href="aRegistroNotaBachillerato.xhtml">Resgistro Nota Presentacion</a></li>
+                    <li><a href="aAccionesAfirmativas.xhtml">Registro de Acciones Afirmativas</a></li>
+                    <li><a href="aCalculoPromedio.xhtml" >Calculo Promedio</a></li>
+                    <li><a href="aConsultaEstadoAdmision.xhtml">Consulta Estado de Admision</a></li>
+
                     <li id="Salir"><a href="login.xhtml">Salir</a></li>
                 </ul>
             </div>
-            <!-- /Header -->
-
-            <!-- Content -->
-            <div class="center_content">
-                <div style="margin-left:  90%;">
-                    <h:outputLabel value="Nombre Usuario"></h:outputLabel>
-                </div>
-                <br/>
-
-                <div >
-                    <h4 class="menuBanner">Mantenimiento</h4>
-                </div>
-            </div>
-            <!-- /Content -->
-
-            <!-- Footer -->
             
-            <!-- /Footer -->
+            <div align="center" class="datagrid">
+               
+            <br/>
+            <br/>
+             <h:commandButton value="Mostrar Lista de Acciones Afirmativas"></h:commandButton>
+             <h:commandButton value="Nuevo"></h:commandButton>
+             <h:commandButton value="Guardar"></h:commandButton>
+             <h:commandButton value="Buscar"></h:commandButton>
+             <h:commandButton value="Editar"></h:commandButton>
+             <h:commandButton value="Ayuda"></h:commandButton>
+             <br/>
+            <br/>
+            <h:dataTable value="#{beanAccionesAfirmativas}" var="per">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Poblacion"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="Poblacion"></h:outputText>
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Documento"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="Documento"></h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lugar"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="Lugar"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Puntaje"></h:outputText>
+                    </f:facet>
+                <h:outputText value="Puntaje"></h:outputText>
+                </h:column>
+            </h:dataTable>
+                       
+            </div>
         </h:form>
     </h:body>
 </html>
-
 
