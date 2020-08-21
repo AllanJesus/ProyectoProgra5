@@ -31,44 +31,46 @@
                
             <br/>
             <br/>
-             <h:commandButton value="Mostrar Lista de Acciones Afirmativas"></h:commandButton>
+            <h:commandButton value="Mostrar Lista de Acciones Afirmativas" actionListener="#{beanAccionesAfirmativas.mostrarLista()}"></h:commandButton>
+        
              
              <br/>
             <br/>
-            <h:dataTable value="#{beanAccionesAfirmativas}" var="per">
+            <h:dataTable value="#{beanAccionesAfirmativas.listaAcciones}" var="per">
+                
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Poblacion"></h:outputText>
                     </f:facet>
-                    <h:outputText value="Poblacion"></h:outputText>
+                    <h:outputText value="#{per.poblaciones}"></h:outputText>
                 </h:column>
                  <h:column>
                     <f:facet name="header">
                         <h:outputText value="Documento"></h:outputText>
                     </f:facet>
-                    <h:outputText value="Documento"></h:outputText>
+                     <h:outputText value="#{per.documentos}"></h:outputText>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Lugar"></h:outputText>
                     </f:facet>
-                    <h:outputText value="Lugar"></h:outputText>
+                    <h:outputText value="#{per.lugarPresentar}"></h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Puntaje"></h:outputText>
                     </f:facet>
-                <h:outputText value="Puntaje"></h:outputText>
+                    <h:outputText value="#{per.puntos}"></h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Aplicar Acciones Afirmativas"></h:outputText>
+                        <h:outputText value="Aplicar Acciones Afirmativas" ></h:outputText>
                     </f:facet>
                     <h:commandLink value="Optar" ></h:commandLink>
                 </h:column>
             </h:dataTable>
-                       
+            
             </div>
         </h:form>
     </h:body>
