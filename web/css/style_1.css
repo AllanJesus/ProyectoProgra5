@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 5, 2018, 1:01:28 PM
+    Author     : Jose
+*/
+
+.datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
+.datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #000000; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+.datagrid table td, .datagrid table th { padding: 3px 10px; }
+.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #991D14), color-stop(1, #7F1E13) );background:-moz-linear-gradient( center top, #991D14 5%, #7F1E13 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#991D14', endColorstr='#7F1E13');background-color:#991D14; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A81A0A; }
+.datagrid table thead th:first-child { border: none; }
+.datagrid table tbody td { color: #000000; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }
+.datagrid table tbody .alt td { background: #E1EEF4; color: #000000; }
+.datagrid table tbody td:first-child { border-left: none; }
+.datagrid table tbody tr:last-child td { border-bottom: none; }
+
+
+input{
+    background-color: #C2896A;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type="button"] {
+
+    width: 80px;
+    margin-left: 35px;
+    display: ruby;
+}
