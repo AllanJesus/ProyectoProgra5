@@ -17,12 +17,24 @@ public class Persona {
     String Nombre;
     String apellido1;
     String apellido2;
-    Date fechaNacimiento;
+    String fechaNacimiento;
     int edad;
     String correo;
 
     public Persona() {
     }
+
+    public Persona(int identificacion, String Nombre, String apellido1, String apellido2, String fechaNacimiento, int edad, String correo) {
+        this.identificacion = identificacion;
+        this.Nombre = Nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = edad;
+        this.correo = correo;
+    }
+    
+    
 
     public int getIdentificacion() {
         return identificacion;
@@ -56,11 +68,11 @@ public class Persona {
         this.apellido2 = apellido2;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

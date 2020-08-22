@@ -5,12 +5,20 @@
  */
 package controller;
 
+import dao.SNMPExceptions;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
+import javax.jws.soap.SOAPBinding;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import model.PasswordGenerator;
+import model.Persona;
+import model.PersonaDB;
+import model.Usuario;
+import model.UsuarioDB;
 
 /**
  *
@@ -26,7 +34,7 @@ public class beanLogin implements Serializable {
     String contrasena2;
     String tipoUsuario;
     String mensajeError;
-    
+
     String identificacion;
     String nombre;
     String correo;
@@ -35,7 +43,7 @@ public class beanLogin implements Serializable {
 
     ////////////////////////////Patrones para Validar Login \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     Pattern matchesIdentidad = Pattern.compile("[0-9]");
-    
+
     Pattern matchesCaracterEspecial = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE); //Validar Caracteres Especiales
     Pattern matchesMayuscula = Pattern.compile("[A-Z ]"); //Validar Mayuscula 
     Pattern matchesMinuscula = Pattern.compile("[a-z ]"); //Validar minuscula
@@ -45,26 +53,19 @@ public class beanLogin implements Serializable {
     public beanLogin() {
     }
 
-    
     ////////////////////////////Validaciones Login////////////////////////////
     public String validacionLogin() {
         if (validacionUsuarioVacio()) {
             mensajeError = "Campo de usuario no debe estar en blanco";
             return mensajeError;
         }
-        
+
         if (validacionContrasenaVacio()) {
             mensajeError = "Campo de Contraseñas no debe estar en blanco";
             return mensajeError;
         }
-        
-//        if (tipoUsuario.equals("Registro")) {
-//            return "rMenuRegistro.xhtml";
-//        }
         mensajeError = "";
         return "aMenuAspirante.xhtml";
-//        return "aAutoRegistro.xhtml";
-//        return "aRegistroConstrasena.xhtml";
     }
 
 ////////////////////////////Patrones para Validar Login////////////////////////////
@@ -74,111 +75,108 @@ public class beanLogin implements Serializable {
         }
         return false;
     }
-    
+
     private boolean validacionContrasenaVacio() { // Valida Contraseña en Blanco
 
         if (this.contrasena.equals("")) {
             return true;
-        }  
-        
+        }
+
         return false;
-    }   
-    
-    
-    
+    }
+
 ////////////////////////////Validacion AutoRegistro ////////////////////////////
-    public String validarAutoRegistro(){
+    public String validarAutoRegistro() {
         if (validacionIdentificacionVacio()) {
             mensajeError = "Debe escribir una identificacion";
             return mensajeError;
         }
-        
+
         if (validacionIdentificacionValida()) {
             mensajeError = "La identificacion no puede contener letras ni caracteres especiales";
             return mensajeError;
-        }       
-        
+        }
+
         if (validacionNombreVacio()) {
             mensajeError = "El campo de Nombre no puede estar vacio";
             return mensajeError;
         }
-        
+
         if (validacionApellidosVacio()) {
             mensajeError = "Debe escribir ambos apellidos";
             return mensajeError;
         }
-        
+
         if (validacionCorreoVacio()) {
             mensajeError = "El campo de correo no puede estar vacio";
             return mensajeError;
         }
-        
+
         if (validacionFormatoCorreo()) {
             mensajeError = "Debe escribir un correo valido";
             return mensajeError;
         }
-        
+
         mensajeError = "";
         return "aMensajeRegistro";
     }
-    
+
 ////////////////////////////Patrones para Validar AutoRegistro////////////////////////////
-private boolean validacionIdentificacionVacio() { // Valida Usuario en Blanco    
-        if ((this.identificacion.matches(""))) {
+    private boolean validacionIdentificacionVacio() { // Valida Usuario en Blanco    
+        if (identificacion.equals("")) {
             return true;
+        } else {
         }
         return false;
     }
 
-private boolean validacionIdentificacionValida() { // Valida Usuario en Blanco    
+    private boolean validacionIdentificacionValida() { // Valida Usuario en Blanco    
         if (!(this.matchesIdentidad.matcher(identificacion).find())) {
             return true;
         }
         return false;
     }
 
-private boolean validacionCorreoVacio() { // Valida Usuario en Blanco    
+    private boolean validacionCorreoVacio() { // Valida Usuario en Blanco    
         if ((this.correo.matches(""))) {
             return true;
         }
         return false;
     }
 
-private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco    
+    private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco    
         if (!(matchesCorreo.matcher(this.correo).find())) {
             return true;
         }
         return false;
     }
 
-    
     private boolean validacionNombreVacio() { // Valida Usuario en Blanco    
         if ((this.nombre.matches(""))) {
             return true;
         }
         return false;
     }
-    
+
     private boolean validacionApellidosVacio() { // Valida Usuario en Blanco    
-        if ((this.apellido1.matches("")) || (this.apellido2.matches("")) ) {
+        if ((this.apellido1.matches("")) || (this.apellido2.matches(""))) {
             return true;
         }
         return false;
     }
-    
+
 ////////////////////////////Validar Contraseña ////////////////////////////
-    
-    public String validacionContraseña(){
+    public String validacionContraseña() {
         if (validacionTamanoCorrecto()) {
             mensajeError = "La Contraseñas debe tener minimo 8 caracteres y no mas de 12";
             return mensajeError;
         }
-        
+
         if (validacionContrasena1Vacio()) {
             mensajeError = "Debe escribir la Contraseñas en ambos campos";
             return mensajeError;
         }
-        
+
         if (validacionNumeros()) {
             mensajeError = "La Contraseñas debe tener por lo menos un numero";
             return mensajeError;
@@ -192,26 +190,23 @@ private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco
         if (validacionMayusculas()) {
             mensajeError = "La Contraseñas debe tener por lo menos una letra mayuscula";
             return mensajeError;
-        }      
-        
+        }
+
         if (validacionMinusculas()) {
             mensajeError = "La Contraseñas debe tener por lo menos una letra minuscula";
             return mensajeError;
         }
-        
+
         if (validacionConstrasenasIguales()) {
             mensajeError = "Las contrasenas no coiciden";
             return mensajeError;
-        }      
-        
+        }
+
         mensajeError = "";
         return "aMensajeConstrasena.xhtml";
-        
+
     }
-    
-    
-    
-    
+
 ////////////////////////////Patrones para Validar Contraseña ////////////////////////////
     private boolean validacionTamanoCorrecto() { // Valida que el tamaño de la contraseña sea correcto
         if (this.contrasena1.length() <= 8 || this.contrasena1.length() >= 12) {
@@ -247,21 +242,63 @@ private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco
         }
         return false;
     }
-    
+
     private boolean validacionConstrasenasIguales() { // Valida que haya por lo menos un numero
         if (!(this.contrasena1.equals(this.contrasena2))) {
             return true;
         }
         return false;
     }
-    
+
     private boolean validacionContrasena1Vacio() { // Valida que haya por lo menos un numero
-        if ((this.contrasena1.matches(""))||(this.contrasena2.matches(""))) {
+        if ((this.contrasena1.matches("")) || (this.contrasena2.matches(""))) {
             return true;
         }
         return false;
     }
-    
+////////////////////////////Generar Contraseña////////////////////////////
+
+    private String GenerarConstraseña() {
+        String password;
+        PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()
+                .useDigits(true).useLower(true).useUpper(true).build();
+        password = passwordGenerator.generate(8);
+        return password;
+    }
+
+////////////////////////////Insterts, updates////////////////////////////
+    public void RegistrarPersona() throws SNMPExceptions, SQLException {
+
+        if (validarAutoRegistro().equals("")) {
+            Persona p = new Persona();
+            PersonaDB pDB = new PersonaDB();
+            Usuario u = new Usuario();
+            UsuarioDB uDB = new UsuarioDB();
+
+            p.setIdentificacion(Integer.parseInt(this.getIdentificacion()));
+            p.setNombre(this.getNombre());
+            p.setApellido1(this.getApellido1());
+            p.setApellido2(this.getApellido2());
+            p.setCorreo(this.getCorreo());
+
+            u.setPersona(p);
+            u.setContrasena(GenerarConstraseña());
+            u.setCorreo(this.getCorreo());
+            u.setEstado(true);
+            try {
+                pDB.RegistrarPersona(p);
+                uDB.RegistrarUsuario(u);
+                validarAutoRegistro();
+            } catch (Exception e) {
+                mensajeError = "Error";
+            }
+
+        }else{
+            validarAutoRegistro();
+        }
+
+    }
+
 ////////////////////////////Getters y Setters////////////////////////////
     public String getMensajeError() {
         return mensajeError;
@@ -350,7 +387,5 @@ private boolean validacionFormatoCorreo() { // Valida Usuario en Blanco
     public void setContrasena2(String contrasena2) {
         this.contrasena2 = contrasena2;
     }
-    
-    
 
 }

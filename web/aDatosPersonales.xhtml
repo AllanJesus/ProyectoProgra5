@@ -45,30 +45,35 @@
                     <h4 class="menuBanner">Datos Personales</h4>
                 </div>
                 
-                <div style="margin-left: 17%">
-                    <h:outputLabel value="Identificacion :" ></h:outputLabel>
-                    <h:inputText style="margin-left: 1%" p:placeholder="Identificacion " value = "#{beanDatoPersonal.identificacion}" ></h:inputText>
-                    <h:outputLabel style="margin-left: 1%" value="Tipo Identificacion :"></h:outputLabel>
+                <div style="margin-left: 17%;">
+                    <h:outputLabel value="Identificacion" ></h:outputLabel>
+                    <h:inputText style="margin-left: 1%" p:placeholder="Identificacion" value = "#{beanDatoPersonal.identificacion}" ></h:inputText>
+                    <h:outputLabel style="margin-left: 1%" value="Tipo Identificacion"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Tipo Identificacion " value="#{beanDatoPersonal.tipoIdentificacion}" ></h:inputText>
                     <br/>
                     <br/>
                     
-                    <h:outputLabel value="Nombre Completo :"></h:outputLabel>
+                    <h:outputLabel value="Nombre Completo"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Nombre Completo " value="#{beanDatoPersonal.nombre}"></h:inputText>
                     
-                    <h:outputLabel style="margin-left: 1%" value="Primer Apellido :"></h:outputLabel>
+                    <h:outputLabel style="margin-left: 1%" value="Primer Apellido"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Primer Apellido" value="#{beanDatoPersonal.primerApellido}"></h:inputText>
                     
                     <h:outputLabel style="margin-left: 1%" value="Segundo Apellido :"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Segundo Apellido" value="#{beanDatoPersonal.segundoApellido}"></h:inputText>
-                    
-                    <h:outputLabel style="margin-left: 1%" value="Fecha Nacimiento"></h:outputLabel>
-                    <h:inputText style="margin-left: 1%" p:placeholder="Fecha Nacimiento" value="#{beanDatoPersonal.fechaNacimiento}"></h:inputText>
                     <br/>
                     <br/>
+                    <h:outputLabel  value="Fecha Nacimiento"></h:outputLabel>
+                    <h:inputText style="margin-left: 1%" p:placeholder="DIA-MES-AñO" value="#{beanDatoPersonal.fechaNacimiento}"></h:inputText>
+                                        
+                    <h:outputLabel style="margin-left: 1%" value="Edad"></h:outputLabel>
+                    <h:inputText style="margin-left: 1%" p:placeholder="Edad" value="#{beanDatoPersonal.edad}"></h:inputText>
                     
-                    <h:outputLabel value="Correo :"></h:outputLabel>
+                    <h:outputLabel style="margin-left: 1%" value="Correo"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Correo" value="#{beanDatoPersonal.correo}"></h:inputText>
+                    
+                    
+                    
                     <br/>
                     <br/>
                     
@@ -106,11 +111,14 @@
                     
                     <h:commandButton style="margin-left: 1%" value="Aceptar" actionListener="#{beanDatoPersonal.guardar()}"></h:commandButton>
                     
-                    <h:commandButton style="margin-left: 1%" value="Cancelar" actionListener="#{beanDatoPersonal.limpiar()}"></h:commandButton>
+                    <h:commandButton style="margin-left: 1%" value="Cancelar" actionListener="reset"></h:commandButton>
+                    <br/>
+                    <br/>
+                    <h:commandButton style="margin-left: 1%" value="Insertar Persona" actionListener="#{beanDatoPersonal.insertarPersona()}"></h:commandButton>
                     <br/>
                     <br/>
          
-                    <h:outputLabel value="Resultado:"></h:outputLabel>
+                    <h:outputLabel value="Resultado"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" size="100" value="#{beanDatoPersonal.resultado}"></h:inputText>
                     
                 </div>
