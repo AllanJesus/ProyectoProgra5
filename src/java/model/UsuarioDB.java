@@ -5,61 +5,80 @@
  */
 package model;
 
+import dao.AccesoDatos;
+import dao.SNMPExceptions;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author kevin
  */
+
+
 public class UsuarioDB {
-    
-    Persona persona;
-    String correo;
-    String contrasena;
-    int codigo;
-    boolean estado;
+
+    private AccesoDatos accesoDatos = new AccesoDatos();
+    private Connection conn;
 
     public UsuarioDB() {
+        accesoDatos = new AccesoDatos();
+        accesoDatos.setDbConn(conn);
     }
 
-    public Persona getPersona() {
-        return persona;
-    }
+    public void RegistrarUsuario(Usuario usuario) throws SNMPExceptions, SQLException {
+        String strSQL = "";
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
+        try {
+            //Se obtienen los valores del objeto Departamento
+            Usuario u = new Usuario();
+            u = usuario;
 
-    public String getCorreo() {
-        return correo;
-    }
+            strSQL
+                    = "INSERT INTO Persona(id_usuario, id_persona, correo, contraseña, estado) VALUES "
+                    + "(" + "'" + u.getPersona().getIdentificacion() + "'" + ","
+                    + "'" + u.getPersona().getIdentificacion() + "'" + ","
+                    + "'" + u.getPersona().getCorreo() + "'" + ","
+                    + "'" + u.getContrasena() + "'" + ","
+                    + "'" + u.estadoToInt() + "'" + ")";
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
 
-    public String getContrasena() {
-        return contrasena;
-    }
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+        }
     }
     
-    
-    
+    public void ActualizarUsuario(Usuario usuario) throws SNMPExceptions, SQLException {
+
+        String strSQL = "";
+
+        try {
+
+            Usuario usu = new Usuario();
+            usu = usuario;
+
+            strSQL
+                    = "UPDATE Usuario SET "
+                    + "correo = " + usuario.getCorreo()+ ","
+                    + "contrasena = " + usuario.getContrasena()+ ","
+                    + "estado = " + usuario.estadoToInt()+","
+                    + " WHERE id_usuario = " + usuario.getPersona().identificacion;
+
+            accesoDatos.ejecutaSQL(strSQL);
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+
 }
