@@ -41,6 +41,8 @@ public class beanLogin implements Serializable {
     String apellido1;
     String apellido2;
 
+    boolean inserto;
+
     ////////////////////////////Patrones para Validar Login \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     Pattern matchesIdentidad = Pattern.compile("[0-9]");
 
@@ -117,8 +119,13 @@ public class beanLogin implements Serializable {
             return mensajeError;
         }
 
+        if (!inserto) {
+            mensajeError = "Ya se encuentra registrado";
+            return mensajeError;
+        }
+
         mensajeError = "";
-        return "aMensajeRegistro";
+        return "aMensajeRegistro.xhtml";
     }
 
 ////////////////////////////Patrones para Validar AutoRegistro////////////////////////////
@@ -267,9 +274,10 @@ public class beanLogin implements Serializable {
     }
 
 ////////////////////////////Insterts, updates////////////////////////////
-    public void RegistrarPersona() throws SNMPExceptions, SQLException {
-
-        if (validarAutoRegistro().equals("")) {
+    public String RegistrarPersona() throws SNMPExceptions, SQLException {
+        inserto = true;
+        validarAutoRegistro();
+        if (mensajeError.equals("")) {
             Persona p = new Persona();
             PersonaDB pDB = new PersonaDB();
             Usuario u = new Usuario();
@@ -284,18 +292,18 @@ public class beanLogin implements Serializable {
             u.setPersona(p);
             u.setContrasena(GenerarConstraseña());
             u.setCorreo(this.getCorreo());
-            u.setEstado(true);
+            u.setEstado(false);
             try {
                 pDB.RegistrarPersona(p);
                 uDB.RegistrarUsuario(u);
-                validarAutoRegistro();
+                inserto = true;
+                return validarAutoRegistro();
             } catch (Exception e) {
-                mensajeError = "Error";
+                inserto = false;
+                return validarAutoRegistro();
             }
-
-        }else{
-            validarAutoRegistro();
         }
+        return validarAutoRegistro();
 
     }
 
