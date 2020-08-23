@@ -14,10 +14,18 @@ public class Usuario {
     Persona persona;
     String correo;
     String contrasena;
-    int codigo;
     boolean estado;
 
     public Usuario() {
+    }
+    
+    int estadoToInt(){
+        estado = false;
+        if (estado) {
+            return 1;
+        }
+        
+        return 0;
     }
 
     public Persona getPersona() {
@@ -42,15 +50,7 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+    } 
 
     public boolean isEstado() {
         return estado;

@@ -5,10 +5,14 @@
  */
 package controller;
 
+import dao.SNMPExceptions;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.SQLException;
 import model.Persona;
+import model.PersonaDB;
 
 /**
  *
@@ -22,21 +26,38 @@ public class beanDatoPersonal implements Serializable {
      * Creates a new instance of beanDatoPersonal
      */
     
-    String identificacion;
+    int identificacion;
     String tipoIdentificacion;
     String nombre; 
-    String primerApellido ;
+    String primerApellido;
     String segundoApellido;
-    String fechaNacimiento ; 
-    String correo ;
+    String fechaNacimiento;
+    int edad;
+    String correo;
     String resultado;
-    String otras  ;
+    String otras;
     String mensajeError;
     String Provincia;
      
    
     public beanDatoPersonal() {
         
+    }
+    
+    public void insertarPersona() throws SNMPExceptions, SQLException{
+       
+        Persona persona= new Persona(this.identificacion,this.nombre,this.primerApellido,
+                        this.segundoApellido,this.fechaNacimiento,this.edad,this.correo);
+        
+            PersonaDB pDB= new PersonaDB();
+            
+            
+                try {
+            pDB.RegistrarPersona(persona);  
+               this.mensajeError ="Persona instertada Correctamente";
+        } catch (Exception e) {
+            this.mensajeError ="Persona instertada Incorrectamente";
+        }
     }
 
     public String getProvincia() {
@@ -72,11 +93,11 @@ public class beanDatoPersonal implements Serializable {
     }
     
     
-    public String getIdentificacion() {
+    public int getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(String identificacion) {
+    public void setIdentificacion(int identificacion) {
         this.identificacion = identificacion;
     }
     
@@ -126,6 +147,14 @@ public class beanDatoPersonal implements Serializable {
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
     
     public String validarDatosPersonales(){
         if (validacionIdentificacion()) {
@@ -171,7 +200,7 @@ public class beanDatoPersonal implements Serializable {
     }
     ////////////////////////////Patrones para Validar DatosPersonales////////////////////////////
     private boolean validacionIdentificacion() { // Valida Usuario en Blanco    
-        if ((this.identificacion.matches(""))) {
+        if (Integer.toString(this.identificacion).matches("")) {
             return true;
         }
         return false;
@@ -231,7 +260,7 @@ public class beanDatoPersonal implements Serializable {
                          this.getFechaNacimiento()+ " " + this.getCorreo()+this.getOtras());
     }
     public void limpiar() {
-       this.setIdentificacion("");
+       this.setIdentificacion(0);
        this.setTipoIdentificacion("");
        this.setNombre("");
        this.setPrimerApellido("");

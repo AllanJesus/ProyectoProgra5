@@ -18,8 +18,15 @@ public class AccionAfirmativa {
     int puntos;
     String poblaciones;
     String documentos;
-    String lugarPresentar;
-    String descripcion;
+    int lugarPresentar;
+
+    public AccionAfirmativa(int puntos, String poblaciones, String documentos, int lugarPresentar) {
+        this.puntos = puntos;
+        this.poblaciones = poblaciones;
+        this.documentos = documentos;
+        this.lugarPresentar = lugarPresentar;
+    }
+ 
 
     public AccionAfirmativa() {
 
@@ -49,22 +56,14 @@ public class AccionAfirmativa {
         this.documentos = documentos;
     }
 
-    public String getLugarPresentar() {
+    public int getLugarPresentar() {
         return lugarPresentar;
     }
 
-    public void setLugarPresentar(String lugarPresentar) {
+    public void setLugarPresentar(int lugarPresentar) {
         this.lugarPresentar = lugarPresentar;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
     
     
 }

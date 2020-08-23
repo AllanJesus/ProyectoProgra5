@@ -13,16 +13,18 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"></link>
         <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
     </h:head>
-    
+
     <!-- Header -->
     <h:body>
         <h:form>
             <div id="Header">
                 <ul>
-                    <li><a href="" class="active">Inicio</a></li>
-                    <li><a href="aSolicitudAspirante.xhtml">Solicitud Aspirante</a></li>
-                    <li><a href="aReportes.xhtml">Reportes</a></li>
+                    <li><a href="aInicioAspirante.xhtml">Inicio</a></li>
                     <li><a href="aDatosPersonales.xhtml">Datos Personales</a></li>
+                    <li><a href="" class="active">Resgistro Nota Presentacion</a></li>
+                    <li><a href="aAccionesAfirmativas.xhtml">Registro de Acciones Afirmativas</a></li>
+                    <li><a href="aCalculoPromedio.xhtml" >Calculo Promedio</a></li>
+                    <li><a href="aConsultaEstadoAdmision.xhtml">Consulta Estado de Admision</a></li>
                     <li id="Salir"><a href="login.xhtml">Salir</a></li>
                 </ul>
             </div>
@@ -31,20 +33,29 @@
             <!-- Content -->
             <div class="center_content">
                 <div style="margin-left:  90%;">
-                    <h:outputLabel value="Nombre Usuario"></h:outputLabel>
+                    <h:outputLabel value="Registro Nota Bachillerato"></h:outputLabel>
                 </div>
                 <br/>
 
                 <div >
-                    <h4 class="menuBanner">Bienvenido</h4>
+                    <h4 class="menuBanner">Calcular Promedio de Admision</h4>
+                    <div style="margin-left: 35%">
+                        <h:outputLabel value="Nota Presentacion de Bachillerato"></h:outputLabel>
+                        <h:inputText readonly="true" style="margin-left: 1.5%"></h:inputText>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div style="margin-left: 50%">
+                        <h:commandButton value="Calcular"></h:commandButton>
+                    </div>
                 </div>
             </div>
             <!-- /Content -->
-            
-             <!-- prueba -->
+
+            <!-- prueba -->
 
             <!-- Footer -->
-            
+
             <!-- /Footer -->
         </h:form>
     </h:body>
