@@ -6,18 +6,14 @@
 package controller;
 
 import dao.SNMPExceptions;
-import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 import model.AccionAfirmativa;
 import model.AccionAfirmativaDB;
-import model.Admision;
-import model.AdmisionDB;
 
 /**
  *
@@ -178,7 +174,6 @@ public class beanAccionesAfirmativas implements Serializable {
 
         
     }
-      
-
+   
 
 }
