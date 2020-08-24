@@ -33,17 +33,17 @@ public class PersonaDB {
             //Se obtienen los valores del objeto Departamento
             Persona p = new Persona();
             p = persona;
-            
+
             strSQL
                     = "insert into Persona values ("
                     + p.getIdentificacion() + ","
                     + "'" + p.getNombre() + "'" + ","
                     + "'" + p.getApellido1() + "'" + ","
-                    + "'" + p.getApellido2()+ "'" + ","
-                    + null+ ","
-                    + null+ ","
+                    + "'" + p.getApellido2() + "'" + ","
+                    + null + ","
+                    + null + ","
                     + "'" + p.getCorreo() + "')";
-            
+
             accesoDatos.ejecutaSQL(strSQL);
 
         } catch (SQLException e) {
@@ -56,24 +56,24 @@ public class PersonaDB {
     }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    public void ActualizarPersona(Usuario pUsuario)
+    public void ActualizarPersona(Persona pPersona)
             throws SNMPExceptions, SQLException {
         String strSQL = "";
 
         try {
 
-            Usuario us = new Usuario();
-            us = pUsuario;
-            int estado = us.isEstado()? 1 : 0;
-            
+            Persona per = new Persona();
+            per = pPersona;
 
             strSQL
                     = "exec SP_ActualizarPersona "
-                    + us.getId_usuario() + ","
-                    + "'" + us.getCorreo()+ "'" + ","
-                    + "'" + us.getContrasena()+ "'" + ","
-                    + estado;
+                    + per.getIdentificacion() + ","
+                    + "'" + per.getNombre() + "'" + ","
+                    + "'" + per.getApellido1() + "'" + ","
+                    + "'" + per.getApellido2() + "'" + ","
+                    + "'" + per.getFechaNacimiento() + "'" + ","
+                    + per.getEdad()+ ","
+                    + "'" + per.getCorreo() + "'" + ",";
 
             accesoDatos.ejecutaSQL(strSQL);
 
@@ -86,9 +86,10 @@ public class PersonaDB {
         }
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------    
-    public Persona SeleccionarPersonaPorID(String id) throws SNMPExceptions, 
+
+    public Persona SeleccionarPersonaPorID(String id) throws SNMPExceptions,
             SQLException {
-        
+
         String select = "";
         try {
 
@@ -102,7 +103,7 @@ public class PersonaDB {
                 Persona per = new Persona();
                 per.identificacion = rsPA.getInt("id_persona");
                 per.Nombre = rsPA.getString("nombre");
-                per.apellido1= rsPA.getString("apellido1");
+                per.apellido1 = rsPA.getString("apellido1");
                 per.apellido2 = rsPA.getString("apellido2");
                 per.fechaNacimiento = rsPA.getString("fecha_nacimiento");
                 per.edad = rsPA.getInt("edad");

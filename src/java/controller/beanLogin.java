@@ -97,13 +97,6 @@ public class beanLogin implements Serializable {
         return false;
     }
 
-    private boolean validacionContrasenaValida() { // Valida Usuario en Blanco    
-        if (!(this.matchesIdentidad.matcher(contrasena).find())) {
-            return true;
-        }
-        return false;
-    }
-
 ////////////////////////////Validacion AutoRegistro ////////////////////////////
     public String validarAutoRegistro() {
         if (validacionIdentificacionVacio()) {
@@ -336,14 +329,14 @@ public class beanLogin implements Serializable {
                         PerfilDB pDB = new PerfilDB();
                         Perfil p = pDB.SeleccionarUsuario_PerfilPorID(this.getUsuario());
                         PersonaDB perDB = new PersonaDB();
-                        perDB.SeleccionarPersonaPorID(Integer.toString(u.getId_persona()));
+                        PersonaEstatica.setPersona(perDB.SeleccionarPersonaPorID(Integer.toString(u.getId_persona())));
                         if (this.getTipoUsuario().equals("Registro") && p.getId_perfil() == 1) {
                             enlace = "rMenuRegistro.xhtml";
                             return enlace;
                         }
 
                         if (this.getTipoUsuario().equals("Aspirante") && p.getId_perfil() == 2) {
-                            enlace = "aRegistroConstrasena.xhtml";
+                            enlace = "aInicioAspirante.xhtml";
                             return enlace;
                         }
                         mensajeError = "Debe seleccionar el tipo de Usuario Correcto";

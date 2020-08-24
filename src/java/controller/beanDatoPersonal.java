@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
+import javafx.beans.property.IntegerProperty;
 import model.Persona;
 import model.PersonaDB;
 import model.PersonaEstatica;
@@ -29,47 +30,99 @@ import model.UsuarioEstatico;
 @Named(value = "beanDatoPersonal")
 @SessionScoped
 public class beanDatoPersonal implements Serializable {
-    
-        /**
+
+    /**
      * Creates a new instance of beanDatoPersonal
      */
-    
-    int identificacion;
+    String identificacion;
     String tipoIdentificacion;
-    String nombre; 
+    String nombre;
     String primerApellido;
     String segundoApellido;
     String fechaNacimiento;
-    
-    int edad;
+
+    String edad;
     String correo;
     String resultado;
     String otras;
     String mensajeError;
     String Provincia;
-    
+
     Usuario usuario = UsuarioEstatico.getUsuario();
-     
-   
+    Persona persona = PersonaEstatica.getPersona();
+
     public beanDatoPersonal() {
-        
+
     }
-    
-    public void cargarDatos() throws SNMPExceptions, SQLException, ParseException, Exception{
-        Persona p = PersonaEstatica.getPersona();
-        PersonaDB pDB = new PersonaDB();        
-               
-        
+
+    public String cargarDatos() throws SNMPExceptions, SQLException, ParseException, Exception {
+        if (persona != null) {
+            try {
+                this.setIdentificacion(Integer.toString(persona.getIdentificacion()));
+                this.setTipoIdentificacion("Nacional");
+                this.setNombre(persona.getNombre());
+                this.setPrimerApellido(persona.getApellido1());
+                this.setSegundoApellido(persona.getApellido2());
+                this.setFechaNacimiento(persona.getFechaNacimiento());
+                this.setEdad(Integer.toString(persona.getEdad()));
+                this.setCorreo(persona.getCorreo());
+                mensajeError = "Datos cargado Correctamente";
+                return mensajeError;
+            } catch (Exception e) {
+            }
+        }
+
+        mensajeError = "No hay persona Seleccionada";
+        return mensajeError;
     }
-    
-    public void ActualizarPersona() throws SNMPExceptions, SQLException{
-        Persona per = new Persona();
-        
-    }    
-    
-    public int calcularEdad(LocalDate dob) throws Exception {
-        LocalDate curDate = LocalDate.now();
-        return Period.between(dob, curDate).getYears();
+
+    public String ActualizarPersona() throws SNMPExceptions, SQLException {
+
+        validarDatosPersonales();
+        if (mensajeError.equals("")) {
+            try {
+                PersonaDB pDB = new PersonaDB();
+                persona.setIdentificacion(Integer.parseInt(this.getIdentificacion()));
+                persona.setNombre(this.nombre);
+                persona.setApellido1(this.getPrimerApellido());
+                persona.setApellido2(this.getSegundoApellido());
+                persona.setFechaNacimiento(this.getFechaNacimiento());
+                persona.setEdad(Integer.parseInt(this.getEdad()));
+                persona.setCorreo(this.getCorreo());
+                pDB.ActualizarPersona(persona);
+                mensajeError = "Se guardo correctamente";
+                return mensajeError;
+            } catch (Exception e) {
+                mensajeError = "No se pudo guardar";
+                return mensajeError;
+            }
+        }
+        return validarDatosPersonales();
+    }
+
+    public int calcularEdad(Calendar dob) throws Exception {
+        Calendar today = Calendar.getInstance();
+
+        int curYear = today.get(Calendar.YEAR);
+        int dobYear = dob.get(Calendar.YEAR);
+
+        int age = curYear - dobYear;
+
+        // if dob is month or day is behind today's month or day
+        // reduce age by 1
+        int curMonth = today.get(Calendar.MONTH);
+        int dobMonth = dob.get(Calendar.MONTH);
+        if (dobMonth > curMonth) { // this year can't be counted!
+            age--;
+        } else if (dobMonth == curMonth) { // same month? check for day
+            int curDay = today.get(Calendar.DAY_OF_MONTH);
+            int dobDay = dob.get(Calendar.DAY_OF_MONTH);
+            if (dobDay > curDay) { // this year can't be counted!
+                age--;
+            }
+        }
+
+        return age;
     }
 
     public String getProvincia() {
@@ -79,8 +132,8 @@ public class beanDatoPersonal implements Serializable {
     public void setProvincia(String Provincia) {
         this.Provincia = Provincia;
     }
-    
-     public String getMensajeError() {
+
+    public String getMensajeError() {
         return mensajeError;
     }
 
@@ -103,16 +156,15 @@ public class beanDatoPersonal implements Serializable {
     public void setOtras(String otras) {
         this.otras = otras;
     }
-    
-    
-    public int getIdentificacion() {
+
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(int identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -144,7 +196,7 @@ public class beanDatoPersonal implements Serializable {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -160,7 +212,8 @@ public class beanDatoPersonal implements Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-        public String getResultado() {
+
+    public String getResultado() {
         return resultado;
     }
 
@@ -168,29 +221,28 @@ public class beanDatoPersonal implements Serializable {
         this.resultado = resultado;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
-    
-    public String validarDatosPersonales(){
+
+    public String validarDatosPersonales() {
         if (validacionIdentificacion()) {
             mensajeError = "Debe escribir una identificacion";
             return mensajeError;
         }
         if (validacionTipoIdentificacion()) {
-            mensajeError = "Debe escribir un Tipo de identificacion"
-         ;
+            mensajeError = "Debe escribir un Tipo de identificacion";
             return mensajeError;
-        }     
+        }
         if (validacionNombreVacio()) {
             mensajeError = "El campo de Nombre no puede estar vacio";
             return mensajeError;
         }
-        
+
         if (validacionPrimerApellidoVacio()) {
             mensajeError = "Debe escribir primer apellido";
             return mensajeError;
@@ -215,83 +267,85 @@ public class beanDatoPersonal implements Serializable {
             mensajeError = "Debe Seleccionar una Provincia";
             return mensajeError;
         }
-        
-        return "aMensajeRegistro";
+
+        mensajeError = "";
+        return mensajeError;
     }
+
     ////////////////////////////Patrones para Validar DatosPersonales////////////////////////////
     private boolean validacionIdentificacion() { // Valida Usuario en Blanco    
-        if (Integer.toString(this.identificacion).matches("")) {
+        if (this.getIdentificacion().matches("")) {
             return true;
         }
         return false;
     }
+
     private boolean validacionTipoIdentificacion() { // Valida Usuario en Blanco    
         if ((this.tipoIdentificacion.matches(""))) {
             return true;
         }
         return false;
     }
+
     private boolean validacionNombreVacio() { // Valida Usuario en Blanco    
         if ((this.nombre.matches(""))) {
             return true;
         }
         return false;
     }
+
     private boolean validacionPrimerApellidoVacio() { // Valida Usuario en Blanco    
         if ((this.primerApellido.matches(""))) {
             return true;
         }
         return false;
     }
+
     private boolean validacionSegundoApellidoVacio() { // Valida Usuario en Blanco    
         if ((this.segundoApellido.matches(""))) {
             return true;
         }
         return false;
     }
+
     private boolean validacionFechaNacimientoVacio() { // Valida Usuario en Blanco    
         if ((this.fechaNacimiento.matches(""))) {
             return true;
         }
         return false;
     }
+
     private boolean validacionCorreoVacio() { // Valida Usuario en Blanco    
         if ((this.correo.matches(""))) {
             return true;
         }
         return false;
     }
+
     private boolean validacionOtrasVacio() { // Valida Usuario en Blanco    
         if ((this.otras.matches(""))) {
             return true;
         }
         return false;
-    
+
     }
+
     private boolean validacionProvinciaSeleccionada() { // Valida Usuario en Blanco    
         if ((this.Provincia.matches(""))) {
             return true;
         }
         return false;
-    
+
     }
-    public void guardar() {
-       this.setResultado(this.getIdentificacion()+" "+ this.getTipoIdentificacion()+" "+ this.getNombre()+ " " + this.getPrimerApellido()+ " " + this.getSegundoApellido()+ " "+ 
-                         this.getFechaNacimiento()+ " " + this.getCorreo()+this.getOtras());
-    }
+
     public void limpiar() {
-       this.setIdentificacion(0);
-       this.setTipoIdentificacion("");
-       this.setNombre("");
-       this.setPrimerApellido("");
-       this.setSegundoApellido("");
-       this.setFechaNacimiento("");
-       this.setCorreo("");
-       this.setOtras("");
-       this.setResultado("");
-       this.setMensajeError("");
-      
+        this.setTipoIdentificacion("");
+        this.setFechaNacimiento("");
+        this.setEdad("");
+        this.setCorreo("");
+        this.setOtras("");
+        this.setResultado("");
+        this.setMensajeError("");
     }
-    
-    
+
 }
