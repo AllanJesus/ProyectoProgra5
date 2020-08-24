@@ -19,69 +19,78 @@
 
     <h:body>
         <h:form>
-            
+
             <div align="center" class="datagrid">
-               
-            <br/>
-            <br/>
-            <h:dataTable value = "#{beanAdmision.listaDetalleAspirantes}" var="per">
-               
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="# Identificacion"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.identificacion}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.nombre}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Apellido 1"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.apellido1}"></h:outputText>
-                </h:column>
-                 
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Apellido 2"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.apellido2}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Fecha Nacimiento"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.fechaNacimiento}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Edad"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.edad}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Correo"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.correo}"></h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Promedio de Admision"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{per.promedio}"></h:outputText>
-                </h:column>
-               
-            </h:dataTable>
-            <h:commandButton value="Consultar de solicitudes de Admision" actionListener="#{beanAdmision.mostrarDetalleVotos(per)}"></h:commandButton>
+                <div id="Header">
+                    <ul>
+                        <li><a href="rMenuRegistro.xhtml">Inicio</a></li>
+                        <li><a href="" class="active">Consultar Solicitudes de Admision</a></li>                    
+                        <li><a href="rMantenimiento.xhtml">Mantenimiento Acciones Afirmativas</a></li>
+                        <li><a href="rReportes.xhtml">Reportes de Aspirantes</a></li>
+                        <li id="Salir"><a href="login.xhtml">Salir</a></li>
+                    </ul>
+                </div>
+
+                <br/>
+                <br/>
+                <h:dataTable value = "#{beanAdmision.listaDetalleAspirantes}" var="per">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="# Identificacion"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.identificacion}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.nombre}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido 1"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.apellido1}"></h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido 2"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.apellido2}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Nacimiento"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.fechaNacimiento}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Edad"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.edad}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Correo"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.correo}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Promedio de Admision"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{per.promedio}"></h:outputText>
+                    </h:column>
+
+                </h:dataTable>
+                <h:commandButton value="Consultar de solicitudes de Admision" actionListener="#{beanAdmision.mostrarDetalleVotos(per)}"></h:commandButton>
             </div>
             <br/>
             <br/>
-             <a href="#{request.contextPath}//faces/rConsultaSolicitudes.xhtml">Regresar Consulta de Solicitudes</a>
+            <a href="#{request.contextPath}//faces/rConsultaSolicitudes.xhtml">Regresar Consulta de Solicitudes</a>
         </h:form>
     </h:body>
 </html>
