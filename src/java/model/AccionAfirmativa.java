@@ -15,21 +15,37 @@ import javax.faces.model.SelectItem;
  */
 public class AccionAfirmativa {
     
-    int puntos;
-    String poblaciones;
-    String documentos;
-    int lugarPresentar;
+    private int id;
+    private int puntos;
+    private String poblaciones;
+    private String documentos;
+    private String lugarPresentar;
 
-    public AccionAfirmativa(int puntos, String poblaciones, String documentos, int lugarPresentar) {
-        this.puntos = puntos;
-        this.poblaciones = poblaciones;
-        this.documentos = documentos;
-        this.lugarPresentar = lugarPresentar;
+    public AccionAfirmativa(int id, int puntos, String poblaciones, String documentos, String lugarPresentar) {
+       
+        this.setId(id);
+        this.setPuntos(puntos);
+        this.setPoblaciones(poblaciones);
+        this.setDocumentos(documentos);
+        this.setLugarPresentar(lugarPresentar);
     }
- 
-
+    public AccionAfirmativa(int puntos, String poblaciones, String documentos, String lugarPresentar) {
+      
+        this.setPuntos(puntos);
+        this.setPoblaciones(poblaciones);
+        this.setDocumentos(documentos);
+        this.setLugarPresentar(lugarPresentar);
+    }
+  
     public AccionAfirmativa() {
+    }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPuntos() {
@@ -56,11 +72,11 @@ public class AccionAfirmativa {
         this.documentos = documentos;
     }
 
-    public int getLugarPresentar() {
+    public String getLugarPresentar() {
         return lugarPresentar;
     }
 
-    public void setLugarPresentar(int lugarPresentar) {
+    public void setLugarPresentar(String lugarPresentar) {
         this.lugarPresentar = lugarPresentar;
     }
 
