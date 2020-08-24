@@ -14,13 +14,10 @@
         <h:form>
             <div id="Header">
                 <ul>
-                    <li><a href="aInicioAspirante.xhtml">Inicio</a></li>
-                    <li><a href="" class="active">Datos Personales</a></li>
-                    <li><a href="aRegistroNotaBachillerato.xhtml">Resgistro Nota Presentacion</a></li>
-                    <li><a href="aAccionesAfirmativas.xhtml">Registro de Acciones Afirmativas</a></li>
-                    <li><a href="aCalculoPromedio.xhtml" >Calculo Promedio</a></li>
-                    <li><a href="aConsultaEstadoAdmision.xhtml">Consulta Estado de Admision</a></li>
-
+                    <li><a href="rMenuRegistro" >Inicio</a></li>
+                    <li><a href="rConsultaSolicitudes.xhtml">Consultar Solicitudes de Admision</a></li>                    
+                    <li><a href="" class="active">Mantenimiento de Acciones Afirmativas</a></li>
+                    <li><a href="rReportes.xhtml">Reportes de Aspirantes</a></li>
                     <li id="Salir"><a href="login.xhtml">Salir</a></li>
                 </ul>
             </div>
@@ -29,41 +26,84 @@
                
             <br/>
             <br/>
-             <h:commandButton value="Mostrar Lista de Acciones Afirmativas"></h:commandButton>
-             <h:commandButton value="Nuevo"></h:commandButton>
-             <h:commandButton value="Guardar"></h:commandButton>
-             <h:commandButton value="Buscar"></h:commandButton>
-             <h:commandButton value="Editar"></h:commandButton>
-             <h:commandButton value="Ayuda"></h:commandButton>
+             
+             <h:commandButton value="Nuevo" actionListener="#{beanAccionesAfirmativas.limpiarCampos()}"></h:commandButton>
+             <h:commandButton value="Guardar Nuevo" actionListener="#{beanAccionesAfirmativas.insertarCampos()}"></h:commandButton>
+             <h:commandButton value="Buscar" actionListener="#{beanAccionesAfirmativas.actualizaDatos()}"></h:commandButton>
+             <h:commandButton value="Guardar Edicción" actionListener="#{beanAccionesAfirmativas.actualizaDatos()}"></h:commandButton>
+             <h:commandButton value="Ayuda" action="login.xhtml"></h:commandButton>
              <br/>
             <br/>
-            <h:dataTable value="#{beanAccionesAfirmativas}" var="per">
+
+            
+             <h:outputText value="# de Accion Afirmativa"></h:outputText>
+             <h:inputText value="#{beanAccionesAfirmativas.id}"></h:inputText>
+            
+            <h:outputText value="Poblacion"></h:outputText>
+            <h:inputText value="#{beanAccionesAfirmativas.poblaciones}"></h:inputText>
+
+            <h:outputText value="Documento"></h:outputText>
+            <h:inputText value="#{beanAccionesAfirmativas.documentos}"></h:inputText>
+            
+            <h:outputText value="Lugar"></h:outputText>
+            <h:inputText value="#{beanAccionesAfirmativas.lugar}"></h:inputText>
+            
+            <h:outputText value="Puntaje"></h:outputText>
+            <h:inputText value="#{beanAccionesAfirmativas.puntos}"></h:inputText>
+            <br/>
+            <br/>
+            <h:outputText value="#{beanAccionesAfirmativas.mensaje}" style="color: red"></h:outputText>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h:commandButton value="Mostrar Lista de Acciones Afirmativas" actionListener="#{beanAccionesAfirmativas.FiltroTabla}"></h:commandButton>
+        
+             
+             <br/>
+            <br/>
+            <h:dataTable value="#{beanAccionesAfirmativas.listaAcciones}" var="per">
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="# de Accion Afirmativa"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{per.id}"></h:outputText>
+                </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Poblacion"></h:outputText>
                     </f:facet>
-                    <h:outputText value="Poblacion"></h:outputText>
+                    <h:outputText value="#{per.poblaciones}"></h:outputText>
                 </h:column>
                  <h:column>
                     <f:facet name="header">
                         <h:outputText value="Documento"></h:outputText>
                     </f:facet>
-                    <h:outputText value="Documento"></h:outputText>
+                     <h:outputText value="#{per.documentos}"></h:outputText>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Lugar"></h:outputText>
                     </f:facet>
-                    <h:outputText value="Lugar"></h:outputText>
+                    <h:outputText value="#{per.lugarPresentar}"></h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Puntaje"></h:outputText>
                     </f:facet>
-                <h:outputText value="Puntaje"></h:outputText>
+                    <h:outputText value="#{per.puntos}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Editar"></h:outputText>
+                    </f:facet>
+                    <h:commandLink value="Editar" actionListener="#{beanAccionesAfirmativas.asignaDatos(per)}"></h:commandLink>
                 </h:column>
             </h:dataTable>
+            
+            
                        
             </div>
         </h:form>

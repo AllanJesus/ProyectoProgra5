@@ -32,13 +32,13 @@
                         <div class="form-group">
                             <h:outputLabel value="Tipo Usuario"></h:outputLabel>
                             <h:selectOneMenu class="form-control" value="#{beanLogin.tipoUsuario}">
-                                <f:selectItem itemLabel="Aspirante" itemValue="Aspirante" />
                                 <f:selectItem itemLabel="Registro" itemValue="Registro" />
+                                <f:selectItem itemLabel="Aspirante" itemValue="Aspirante" />
                             </h:selectOneMenu>
                         </div>
 
-                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Ingresar" action="#{beanLogin.validacionLogin()}" ></h:commandButton> 
-                        <small class="form-text text-muted">Todavia no tienes una cuenta? <a href="paginaRegistro.xhtml" class="text-success">Ingresa Aqui</a></small>
+                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Ingresar" action="#{beanLogin.Ingresar()}" ></h:commandButton> 
+                        <small class="form-text text-muted">Todavia no tienes una cuenta? <a href="aAutoRegistro.xhtml" class="text-success">Ingresa Aqui</a></small>
                         <br></br>
                     </h:form>
                 </div>

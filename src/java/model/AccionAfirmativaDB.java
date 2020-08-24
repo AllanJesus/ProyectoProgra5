@@ -10,7 +10,9 @@ import dao.SNMPExceptions;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
+import javax.naming.NamingException;
 
 /**
  *
@@ -27,46 +29,7 @@ public class AccionAfirmativaDB {
         accesoDatos.setDbConn(conn);
     
     }
-    
-    int puntos;
-    String poblaciones;
-    String documentos;
-    int lugarPresentar;
 
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
-    }
-
-    public String getPoblaciones() {
-        return poblaciones;
-    }
-
-    public void setPoblaciones(String poblaciones) {
-        this.poblaciones = poblaciones;
-    }
-
-    public String getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(String documentos) {
-        this.documentos = documentos;
-    }
-
-    public int getLugarPresentar() {
-        return lugarPresentar;
-    }
-
-    public void setLugarPresentar(int lugarPresentar) {
-        this.lugarPresentar = lugarPresentar;
-    }
-
- 
-     //metodo que se trae toda la lista de Cadidatos
     public LinkedList<AccionAfirmativa> moTodo() throws SNMPExceptions, SQLException{
         String select= "";
         LinkedList<AccionAfirmativa> listaAcciones= new LinkedList<AccionAfirmativa>();
@@ -77,22 +40,19 @@ public class AccionAfirmativaDB {
             
             //Se crea la sentencia de Busqueda
             select=
-                    "SELECT puntos,Poblaciones,Documentos, lugar FROM AccionAfirmativa";
+                    "SELECT AccionAfirmativa.id_accionafirmativa, AccionAfirmativa.puntos,AccionAfirmativa.Poblaciones,AccionAfirmativa.Documentos, AccionAfirmativa.lugar FROM AccionAfirmativa";
             //se ejecuta la sentencia sql
             ResultSet rsPA= accesoDatos.ejecutaSQLRetornaRS(select);
             //se llama el array con los proyectos
             while(rsPA.next()){
                 
+                int id= rsPA.getInt("id_accionafirmativa");
                 int puntos= rsPA.getInt("puntos");
-                
-                String poblaciones = rsPA.getString("Poblaciones");
-                
-                
+                String poblaciones = rsPA.getString("Poblaciones");                
                 String documentos= rsPA.getString("Documentos");
-                
-                int lugar = rsPA.getInt("lugar");
+                String lugar = rsPA.getString("lugar");
                 //se construye el objeto.
-                AccionAfirmativa perAccionAfirmativa= new AccionAfirmativa(puntos,poblaciones,documentos,lugar);
+                AccionAfirmativa perAccionAfirmativa= new AccionAfirmativa(id,puntos,poblaciones,documentos,lugar);
                 
                 listaAcciones.add(perAccionAfirmativa);
             }
@@ -108,6 +68,60 @@ public class AccionAfirmativaDB {
         }
         return listaAcciones;
     }
+      //insertar telefonos en la base de datos.
+    public void InsertarTelefono(AccionAfirmativa pVoto) 
+                throws SNMPExceptions, SQLException {
+        String strSQL = "";
 
-    
+         
+         try {
+         //Se obtienen los valores del objeto Departamento
+        AccionAfirmativa voto = new AccionAfirmativa();
+        voto=pVoto;
+        
+            strSQL = 
+            "INSERT INTO AccionAfirmativa(id_accionafirmativa,puntos,Poblaciones,Documentos,lugar) VALUES"
+                   
+         + "(" + "'" + voto.getId()+ "'" + "," 
+               + "'"+ voto.getPuntos()+"'"+ ","
+               + "'"+ voto.getPoblaciones()+"'"+ ","
+               + "'"+ voto.getDocumentos()+"'" + ","
+               + "'"+ voto.getLugarPresentar()+"'"+ ")";
+                            
+   
+                     //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+
+    public void actualizarDepartamento(AccionAfirmativa accionp) throws SNMPExceptions, SQLException, NamingException, ClassNotFoundException {
+           //Se obtienen los valores del objeto Cliente
+           AccionAfirmativa d = new AccionAfirmativa();
+           d = accionp;
+           
+           //Datos de CLiente         
+            int id = d.getId();
+            int punt = d.getPuntos();
+            String pob = d.getPoblaciones();
+            String doc = d.getDocumentos();
+            String lug = d.getLugarPresentar();
+            
+            
+         
+           //Se crea la sentencia de actualización
+           String update = 
+                   "UPDATE AccionAfirmativa SET puntos = '" + punt + "' , Poblaciones = '" + pob + "'"
+                   + " , Documentos = '" + doc + "', lugar= '" + lug + "' where id_accionafirmativa = '"+id+"';";
+           //Se ejecuta la sentencia SQL
+           accesoDatos.ejecutaSQL(update);
+               
+     }
 }

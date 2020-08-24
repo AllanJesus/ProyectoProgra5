@@ -44,7 +44,9 @@
                 <div>
                     <h4 class="menuBanner">Datos Personales</h4>
                 </div>
-                
+                <div>
+                    <h:commandButton style="margin-left: 1%" value="Guardar" actionListener="#{beanDatoPersonal.cargarDatos()}"></h:commandButton>
+                </div>
                 <div style="margin-left: 17%;">
                     <h:outputLabel value="Identificacion" ></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Identificacion" value = "#{beanDatoPersonal.identificacion}" ></h:inputText>
@@ -64,7 +66,7 @@
                     <br/>
                     <br/>
                     <h:outputLabel  value="Fecha Nacimiento"></h:outputLabel>
-                    <h:inputText style="margin-left: 1%" p:placeholder="DIA-MES-AñO" value="#{beanDatoPersonal.fechaNacimiento}"></h:inputText>
+                    <h:inputText style="margin-left: 1%" p:placeholder="DIA/MES,AñO" value="#{beanDatoPersonal.fechaNacimiento}"></h:inputText>
                                         
                     <h:outputLabel style="margin-left: 1%" value="Edad"></h:outputLabel>
                     <h:inputText style="margin-left: 1%" p:placeholder="Edad" value="#{beanDatoPersonal.edad}"></h:inputText>
@@ -114,12 +116,9 @@
                     <h:commandButton style="margin-left: 1%" value="Cancelar" actionListener="reset"></h:commandButton>
                     <br/>
                     <br/>
-                    <h:commandButton style="margin-left: 1%" value="Insertar Persona" actionListener="#{beanDatoPersonal.insertarPersona()}"></h:commandButton>
+                    <h:commandButton style="margin-left: 1%" value="Guardar" actionListener="#{beanDatoPersonal.ActualizarPersona()}"></h:commandButton>
                     <br/>
                     <br/>
-         
-                    <h:outputLabel value="Resultado"></h:outputLabel>
-                    <h:inputText style="margin-left: 1%" size="100" value="#{beanDatoPersonal.resultado}"></h:inputText>
                     
                 </div>
             </div>

@@ -11,14 +11,19 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+import javax.faces.context.FacesContext;
 import javax.jws.soap.SOAPBinding;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import model.PasswordGenerator;
+import model.Perfil;
+import model.PerfilDB;
 import model.Persona;
 import model.PersonaDB;
+import model.PersonaEstatica;
 import model.Usuario;
 import model.UsuarioDB;
+import model.UsuarioEstatico;
 
 /**
  *
@@ -62,12 +67,17 @@ public class beanLogin implements Serializable {
             return mensajeError;
         }
 
+//        if (validacionContrasenaValida()) {
+//            mensajeError = "Campo de usuario solo debe contener numeros";
+//            return mensajeError;
+//        }
         if (validacionContrasenaVacio()) {
             mensajeError = "Campo de Contraseñas no debe estar en blanco";
             return mensajeError;
         }
+
         mensajeError = "";
-        return "aMenuAspirante.xhtml";
+        return mensajeError;
     }
 
 ////////////////////////////Patrones para Validar Login////////////////////////////
@@ -84,6 +94,13 @@ public class beanLogin implements Serializable {
             return true;
         }
 
+        return false;
+    }
+
+    private boolean validacionContrasenaValida() { // Valida Usuario en Blanco    
+        if (!(this.matchesIdentidad.matcher(contrasena).find())) {
+            return true;
+        }
         return false;
     }
 
@@ -119,13 +136,8 @@ public class beanLogin implements Serializable {
             return mensajeError;
         }
 
-        if (!inserto) {
-            mensajeError = "Ya se encuentra registrado";
-            return mensajeError;
-        }
-
         mensajeError = "";
-        return "aMensajeRegistro.xhtml";
+        return "aRegistroConstrasena.xhtml";
     }
 
 ////////////////////////////Patrones para Validar AutoRegistro////////////////////////////
@@ -173,7 +185,7 @@ public class beanLogin implements Serializable {
     }
 
 ////////////////////////////Validar Contraseña ////////////////////////////
-    public String validacionContraseña() {
+    public String validacionContrasena() {
         if (validacionTamanoCorrecto()) {
             mensajeError = "La Contraseñas debe tener minimo 8 caracteres y no mas de 12";
             return mensajeError;
@@ -275,13 +287,13 @@ public class beanLogin implements Serializable {
 
 ////////////////////////////Insterts, updates////////////////////////////
     public String RegistrarPersona() throws SNMPExceptions, SQLException {
-        inserto = true;
         validarAutoRegistro();
         if (mensajeError.equals("")) {
             Persona p = new Persona();
             PersonaDB pDB = new PersonaDB();
             Usuario u = new Usuario();
             UsuarioDB uDB = new UsuarioDB();
+            PerfilDB perDB = new PerfilDB();
 
             p.setIdentificacion(Integer.parseInt(this.getIdentificacion()));
             p.setNombre(this.getNombre());
@@ -289,25 +301,84 @@ public class beanLogin implements Serializable {
             p.setApellido2(this.getApellido2());
             p.setCorreo(this.getCorreo());
 
-            u.setPersona(p);
+            u.setId_persona(Integer.parseInt(this.getIdentificacion()));
+            u.setId_usuario(Integer.parseInt(this.getIdentificacion()));
             u.setContrasena(GenerarConstraseña());
             u.setCorreo(this.getCorreo());
             u.setEstado(false);
             try {
                 pDB.RegistrarPersona(p);
+                PersonaEstatica.setPersona(p);
                 uDB.RegistrarUsuario(u);
-                inserto = true;
+                perDB.InsertarPerfil(u);
+                UsuarioEstatico.setUsuario(u);
                 return validarAutoRegistro();
             } catch (Exception e) {
-                inserto = false;
-                return validarAutoRegistro();
+                mensajeError = "Este usuario ya se encuentra registrado";
+                return mensajeError;
             }
         }
         return validarAutoRegistro();
-
     }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    public String Ingresar() throws SNMPExceptions, SQLException {
+        validacionLogin();
+        String enlace = "";
+
+        if (mensajeError.equals("")) {
+            try {
+                Usuario u = new Usuario();
+                UsuarioDB uDb = new UsuarioDB();
+                u = uDb.selectUsuarioPorID(this.getUsuario());
+                if (u != null) {
+                    if (u.getContrasena().equals(this.getContrasena())) {
+                        PerfilDB pDB = new PerfilDB();
+                        Perfil p = pDB.SeleccionarUsuario_PerfilPorID(this.getUsuario());
+                        PersonaDB perDB = new PersonaDB();
+                        perDB.SeleccionarPersonaPorID(Integer.toString(u.getId_persona()));
+                        if (this.getTipoUsuario().equals("Registro") && p.getId_perfil() == 1) {
+                            enlace = "rMenuRegistro.xhtml";
+                            return enlace;
+                        }
+
+                        if (this.getTipoUsuario().equals("Aspirante") && p.getId_perfil() == 2) {
+                            enlace = "aRegistroConstrasena.xhtml";
+                            return enlace;
+                        }
+                        mensajeError = "Debe seleccionar el tipo de Usuario Correcto";
+                        return mensajeError;
+                    }
+                }
+
+                mensajeError = "La identificacion o la contraseña esta mal, intentelo de nuevo";
+                return mensajeError;
+
+            } catch (Exception e) {
+                mensajeError = "La identificacion o la contraseña esta mal, intentelo de nuevo";
+                return mensajeError;
+            }
+        }
+        return validacionLogin();
+    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public String registrarConstrasena() throws SNMPExceptions, SQLException {
+        validacionContrasena();
+        if (mensajeError.equals("")) {
+            UsuarioDB uDB = new UsuarioDB();
+            Usuario u = UsuarioEstatico.getUsuario();
+            if (u != null) {
+                u.setContrasena(this.getContrasena1());
+                UsuarioEstatico.setUsuario(u);
+                uDB.ActualizarUsuario(UsuarioEstatico.getUsuario());
+                return validacionContrasena();
+            }
+        }
+        return validacionContrasena();
+    }
 ////////////////////////////Getters y Setters////////////////////////////
+
     public String getMensajeError() {
         return mensajeError;
     }
