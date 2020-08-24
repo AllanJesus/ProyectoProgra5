@@ -40,13 +40,15 @@
                 <div >
                     <h4 class="menuBanner">Calcular Promedio de Admision</h4>
                     <div style="margin-left: 35%">
+                        <h:outputLabel value="#{beanLogin.mensajeError}" class=" text-center font-weight-bold text-danger"></h:outputLabel>
+                        <br/>
                         <h:outputLabel value="Nota Presentacion de Bachillerato"></h:outputLabel>
-                        <h:inputText readonly="true" style="margin-left: 1.5%"></h:inputText>
+                        <h:inputText style="margin-left: 1.5%" value="#{beanAdmision.promedio}"></h:inputText>
                         <br/>
                         <br/>
                     </div>
                     <div style="margin-left: 50%">
-                        <h:commandButton value="Calcular"></h:commandButton>
+                        <h:commandButton value="Guardar" ></h:commandButton>
                     </div>
                 </div>
             </div>

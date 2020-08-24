@@ -5,16 +5,21 @@
  */
 package controller;
 
+import dao.AccesoDatos;
 import dao.SNMPExceptions;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.faces.context.FacesContext;
 import model.Admision;
 import model.AdmisionDB;
+import model.Persona;
+import model.PersonaEstatica;
+import model.Usuario;
 
 /**
  *
@@ -23,21 +28,22 @@ import model.AdmisionDB;
 @Named(value = "beanAdmision")
 @SessionScoped
 public class beanAdmision implements Serializable {
-    
 
     private int idpersona;
     private String nombre;
     private String apellido1;
     private String apellido2;
-    private int promedio;
+    private String promedio;
     
-    private LinkedList<Admision>listaDetalleSolicitudes= new LinkedList<Admision>();
-    private LinkedList<Admision>listaDetalleAspirantes= new LinkedList<Admision>();
-    
+    private String mensajeError;
+
+    private LinkedList<Admision> listaDetalleSolicitudes = new LinkedList<Admision>();
+    private LinkedList<Admision> listaDetalleAspirantes = new LinkedList<Admision>();
+
     public beanAdmision() {
     }
 
-    public beanAdmision(int idpersona, String nombre, String apellido1, String apellido2, int promedio) {
+    public beanAdmision(int idpersona, String nombre, String apellido1, String apellido2, String promedio) {
         this.idpersona = idpersona;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -52,7 +58,6 @@ public class beanAdmision implements Serializable {
     public void setListaDetalleAspirantes(LinkedList<Admision> listaDetalleAspirantes) {
         this.listaDetalleAspirantes = listaDetalleAspirantes;
     }
-    
 
     public LinkedList<Admision> getListaDetalleSolicitudes() {
         return listaDetalleSolicitudes;
@@ -61,7 +66,6 @@ public class beanAdmision implements Serializable {
     public void setListaDetalleSolicitudes(LinkedList<Admision> listaDetalleSolicitudes) {
         this.listaDetalleSolicitudes = listaDetalleSolicitudes;
     }
-    
 
     public int getIdpersona() {
         return idpersona;
@@ -95,16 +99,17 @@ public class beanAdmision implements Serializable {
         this.apellido2 = apellido2;
     }
 
-    public int getPromedio() {
+    public String getPromedio() {
         return promedio;
     }
-    public void setPromedio(int promedio) {
+
+    public void setPromedio(String promedio) {
         this.promedio = promedio;
     }
 
-   public void mostrarDetalleVotos(Admision per)throws SNMPExceptions, SQLException,IOException {
-        AdmisionDB AdmisionDB= new AdmisionDB();
-        
+    public void mostrarDetalleVotos(Admision per) throws SNMPExceptions, SQLException, IOException {
+        AdmisionDB AdmisionDB = new AdmisionDB();
+
         this.setListaDetalleSolicitudes(AdmisionDB.listaDetalleSolicitudesApirantes());
 
     }
@@ -114,6 +119,22 @@ public class beanAdmision implements Serializable {
         this.setListaDetalleAspirantes(AdmisionDB.listaDetalleDatosApirantes(per.getIdentificacion()));
         FacesContext.getCurrentInstance().getExternalContext().redirect("rConsultaSolicitudes_1.xhtml");
 
+    }
+
+    public String guardarAdmision() throws SNMPExceptions, SQLException {
+        Persona p = PersonaEstatica.getPersona();
+        Admision a = new Admision();
+        a.setId_admision(p.getIdentificacion());
+        a.setIdentificacion(p.getIdentificacion());
+        a.setNota(Integer.parseInt(this.getPromedio()));
+        AdmisionDB aDB = new AdmisionDB();
+
+        if (this.getPromedio().equals("")) {
+            aDB.InsertarAdmision(a);
+            mensajeError = "Se guardo correctamente";
+            return "";
+        }
+        return mensajeError = "El campo no puede estar null";
     }
 
 }

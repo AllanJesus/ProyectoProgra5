@@ -16,7 +16,7 @@ public class Admision {
     private int puntosAcciones;
     private float nota;
     private float promedio;
-    boolean estado;
+    String estado;
     private int usuarioId;
     private Date fecha;
     
@@ -24,6 +24,7 @@ public class Admision {
    // para detalle de los datos del aspirante
 
      private int identificacion;
+     int id_admision;
      private String nombre;
      private String apellido1;
      private String apellido2;
@@ -55,6 +56,14 @@ public class Admision {
         this.edad = edad;
         this.correo = correo;
     }
+
+    public int getId_admision() {
+        return id_admision;
+    }
+
+    public void setId_admision(int id_admision) {
+        this.id_admision = id_admision;
+    }
     
     public int getPuntosAcciones() {
         return puntosAcciones;
@@ -80,11 +89,11 @@ public class Admision {
         this.promedio = promedio;
     }
 
-    public boolean isEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

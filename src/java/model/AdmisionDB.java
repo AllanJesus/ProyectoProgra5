@@ -7,6 +7,7 @@ package model;
 
 import dao.AccesoDatos;
 import dao.SNMPExceptions;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +19,17 @@ import java.util.LinkedList;
  */
 public class AdmisionDB {
     
+    private AccesoDatos accesoDatos = new AccesoDatos();
+    private Connection conn;
+    
     Persona persona;
     float nota;
     float promedio;
     boolean estado;
 
     public AdmisionDB() {
+        accesoDatos = new AccesoDatos();
+        accesoDatos.setDbConn(conn);
     }
 
     public Persona getPersona() {
@@ -166,5 +172,37 @@ public class AdmisionDB {
         return listaDetSolicitudes;
     }
     
+     //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public void InsertarAdmision(Admision admision) throws SNMPExceptions, SQLException {
+        String strSQL = "";
+
+        try {
+            //Se obtienen los valores del objeto Departamento
+            Admision a = new Admision();
+            a = admision;
+            a.setEstado("Pentiente");
+
+            strSQL
+                    = "insert into Admision values ("
+                    + a.getId_admision() + ","
+                    + a.getIdentificacion() + ","
+                    + "'" + a.getNota() + "'" + ","
+                    + "'" + a.getPromedio() + "'" + ","
+                    + "'" + a.getEstado() + "'" + ")";
+
+            //Se ejecuta la sentencia SQL
+            accesoDatos.ejecutaSQL(strSQL);
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     
 }
