@@ -24,7 +24,6 @@ public class UsuarioDB {
         accesoDatos = new AccesoDatos();
         accesoDatos.setDbConn(conn);
     }
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public void RegistrarUsuario(Usuario usuario) throws SNMPExceptions, SQLException {
         String strSQL = "";
@@ -36,9 +35,9 @@ public class UsuarioDB {
 
             strSQL
                     = "insert into Usuario values ("
-                    + u.getId_persona() + ","
-                    + u.getId_usuario() + ","
-                    + "'" + u.getCorreo() + "'" + ","
+                    + u.getPersona().getIdentificacion() + ","
+                    + u.getPersona().getIdentificacion() + ","
+                    + "'" + u.getPersona().getCorreo() + "'" + ","
                     + "'" + u.getContrasena() + "'" + ","
                     + u.estadoToInt() + ")";
 
@@ -53,25 +52,22 @@ public class UsuarioDB {
 
         }
     }
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public void ActualizarUsuario(Usuario pUsuario)
-            throws SNMPExceptions, SQLException {
+    public void ActualizarUsuario(Usuario usuario) throws SNMPExceptions, SQLException {
+
         String strSQL = "";
 
         try {
 
-            Usuario us = new Usuario();
-            us = pUsuario;
-            int estado = us.isEstado()? 1 : 0;
-            
+            Usuario usu = new Usuario();
+            usu = usuario;
 
             strSQL
-                    = "exec SP_ActualizarUsuario "
-                    + us.getId_usuario() + ","
-                    + "'" + us.getCorreo()+ "'" + ","
-                    + "'" + us.getContrasena()+ "'" + ","
-                    + estado;
+                    = "UPDATE Usuario SET "
+                    + "correo = " + usuario.getCorreo() + ","
+                    + "contrasena = " + usuario.getContrasena() + ","
+                    + "estado = " + usuario.isEstado() + ","
+                    + " WHERE id_usuario = " + usuario.getPersona().identificacion;
 
             accesoDatos.ejecutaSQL(strSQL);
 
@@ -83,11 +79,8 @@ public class UsuarioDB {
 
         }
     }
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public Usuario selectUsuarioPorID(String id) throws SNMPExceptions, 
-            SQLException {
-        
+    public Usuario selectUsuarioPorID(String id) throws SNMPExceptions, SQLException {
         String select = "";
         try {
 
@@ -99,8 +92,8 @@ public class UsuarioDB {
 
             if (rsPA.next()) {
                 Usuario usu = new Usuario();
-                usu.id_usuario = rsPA.getInt("id_usuario");
-                usu.id_persona = rsPA.getInt("id_persona");
+                usu.persona.identificacion = rsPA.getInt("id_usuario");
+                usu.persona.identificacion = rsPA.getInt("id_persona");
                 usu.correo = rsPA.getString("correo");
                 usu.contrasena = rsPA.getString("contrasena");
                 usu.estado = rsPA.getBoolean("estado");
@@ -121,6 +114,4 @@ public class UsuarioDB {
 
         }
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 }

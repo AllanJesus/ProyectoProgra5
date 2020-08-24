@@ -15,21 +15,13 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-6 col-md-7">
                     <h:form class="bg-white px-5 pb-5 pt-3 pt-2">
-                        <h1 class="display-4 text-center mb-4 mt-0">Registrar Nueva Constraña</h1>
-                        
-                        <h:outputLabel value="#{beanLogin.mensajeError}" class=" text-center font-weight-bold text-danger"></h:outputLabel>
-                        
-                        <div class="form-group">
-                            <h:outputLabel value="Nueva Contraseña"></h:outputLabel>
-                            <h:inputSecret class="form-control" p:placeholder="Contraseña" value="#{beanLogin.contrasena1}"></h:inputSecret>
-                        </div>
+                        <h1 class="display-4 text-center mb-4 mt-0">Correo Enviado</h1>
 
                         <div class="form-group">
-                            <h:outputLabel value="Confirmar Contraseña"></h:outputLabel>
-                            <h:inputSecret class="form-control" p:placeholder="Contraseña" value="#{beanLogin.contrasena2}" autocomplete="off"></h:inputSecret>
+                            <h:outputLabel value="Un mensaje de verificacion fue enviado a su correo"></h:outputLabel>
                         </div>
 
-                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Registrar Constraña" action="#{beanLogin.validacionContraseña()}"></h:commandButton> 
+                        <h:commandButton class="btn btn-primary btn-block mb-4" value="Regresar" action="login.xhtml" ></h:commandButton> 
                     </h:form>
                 </div>
             </div>

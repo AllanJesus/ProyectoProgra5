@@ -11,27 +11,16 @@ package model;
  */
 public class Perfil {
     
-    int id_usuario;
-    int id_perfil;
+    TipoPerfil tipo;
 
     public Perfil() {
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public TipoPerfil getTipo() {
+        return tipo;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setTipo(TipoPerfil tipo) {
+        this.tipo = tipo;
     }
-
-    public int getId_perfil() {
-        return id_perfil;
-    }
-
-    public void setId_perfil(int id_perfil) {
-        this.id_perfil = id_perfil;
-    }
-
-    
 }

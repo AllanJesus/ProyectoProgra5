@@ -158,7 +158,7 @@ public class beanProvincias implements Serializable {
                 iter.hasNext();) {
         
             Provincia pro = (Provincia) iter.next();
-            dscCortaProvincia=pro.getDsc_provincia();
+            dscCortaProvincia=pro.getDsc_corta_provincia();
             codigoProvincia=pro.getCod_provincia();
             resultList.add(new SelectItem(codigoProvincia, 
                     dscCortaProvincia));
