@@ -29,7 +29,7 @@ public class AccionAfirmativaDB {
         accesoDatos.setDbConn(conn);
     
     }
-    //metodo que se trae toda la lista de Cadidatos
+
     public LinkedList<AccionAfirmativa> moTodo() throws SNMPExceptions, SQLException{
         String select= "";
         LinkedList<AccionAfirmativa> listaAcciones= new LinkedList<AccionAfirmativa>();
