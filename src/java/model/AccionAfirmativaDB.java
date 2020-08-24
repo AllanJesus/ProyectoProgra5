@@ -27,43 +27,6 @@ public class AccionAfirmativaDB {
         accesoDatos.setDbConn(conn);
     
     }
-    
-    int puntos;
-    String poblaciones;
-    String documentos;
-    int lugarPresentar;
-
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
-    }
-
-    public String getPoblaciones() {
-        return poblaciones;
-    }
-
-    public void setPoblaciones(String poblaciones) {
-        this.poblaciones = poblaciones;
-    }
-
-    public String getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(String documentos) {
-        this.documentos = documentos;
-    }
-
-    public int getLugarPresentar() {
-        return lugarPresentar;
-    }
-
-    public void setLugarPresentar(int lugarPresentar) {
-        this.lugarPresentar = lugarPresentar;
-    }
 
  
      //metodo que se trae toda la lista de Cadidatos
