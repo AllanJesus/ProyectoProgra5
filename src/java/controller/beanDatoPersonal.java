@@ -11,8 +11,16 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
 import model.Persona;
 import model.PersonaDB;
+import model.PersonaEstatica;
+import model.Usuario;
+import model.UsuarioEstatico;
 
 /**
  *
@@ -32,32 +40,36 @@ public class beanDatoPersonal implements Serializable {
     String primerApellido;
     String segundoApellido;
     String fechaNacimiento;
+    
     int edad;
     String correo;
     String resultado;
     String otras;
     String mensajeError;
     String Provincia;
+    
+    Usuario usuario = UsuarioEstatico.getUsuario();
      
    
     public beanDatoPersonal() {
         
     }
     
-    public void insertarPersona() throws SNMPExceptions, SQLException{
-       
-        Persona persona= new Persona(this.identificacion,this.nombre,this.primerApellido,
-                        this.segundoApellido,this.fechaNacimiento,this.edad,this.correo);
+    public void cargarDatos() throws SNMPExceptions, SQLException, ParseException, Exception{
+        Persona p = PersonaEstatica.getPersona();
+        PersonaDB pDB = new PersonaDB();        
+               
         
-            PersonaDB pDB= new PersonaDB();
-            
-            
-                try {
-            pDB.RegistrarPersona(persona);  
-               this.mensajeError ="Persona instertada Correctamente";
-        } catch (Exception e) {
-            this.mensajeError ="Persona instertada Incorrectamente";
-        }
+    }
+    
+    public void ActualizarPersona() throws SNMPExceptions, SQLException{
+        Persona per = new Persona();
+        
+    }    
+    
+    public int calcularEdad(LocalDate dob) throws Exception {
+        LocalDate curDate = LocalDate.now();
+        return Period.between(dob, curDate).getYears();
     }
 
     public String getProvincia() {
@@ -131,6 +143,14 @@ public class beanDatoPersonal implements Serializable {
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getCorreo() {

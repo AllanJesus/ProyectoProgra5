@@ -20,6 +20,7 @@ import model.Perfil;
 import model.PerfilDB;
 import model.Persona;
 import model.PersonaDB;
+import model.PersonaEstatica;
 import model.Usuario;
 import model.UsuarioDB;
 import model.UsuarioEstatico;
@@ -307,6 +308,7 @@ public class beanLogin implements Serializable {
             u.setEstado(false);
             try {
                 pDB.RegistrarPersona(p);
+                PersonaEstatica.setPersona(p);
                 uDB.RegistrarUsuario(u);
                 perDB.InsertarPerfil(u);
                 UsuarioEstatico.setUsuario(u);
@@ -333,6 +335,8 @@ public class beanLogin implements Serializable {
                     if (u.getContrasena().equals(this.getContrasena())) {
                         PerfilDB pDB = new PerfilDB();
                         Perfil p = pDB.SeleccionarUsuario_PerfilPorID(this.getUsuario());
+                        PersonaDB perDB = new PersonaDB();
+                        perDB.SeleccionarPersonaPorID(Integer.toString(u.getId_persona()));
                         if (this.getTipoUsuario().equals("Registro") && p.getId_perfil() == 1) {
                             enlace = "rMenuRegistro.xhtml";
                             return enlace;
@@ -371,11 +375,10 @@ public class beanLogin implements Serializable {
                 return validacionContrasena();
             }
         }
-
         return validacionContrasena();
     }
-
 ////////////////////////////Getters y Setters////////////////////////////
+
     public String getMensajeError() {
         return mensajeError;
     }
