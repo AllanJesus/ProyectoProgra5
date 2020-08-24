@@ -20,7 +20,7 @@ public class Usuario {
     }
     
     int estadoToInt(){
-        this.setEstado(true);
+        estado = false;
         if (estado) {
             return 1;
         }

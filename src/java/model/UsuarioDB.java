@@ -33,14 +33,14 @@ public class UsuarioDB {
             //Se obtienen los valores del objeto Departamento
             Usuario u = new Usuario();
             u = usuario;
-
+            
             strSQL
-                    = "INSERT INTO Persona(id_usuario, id_persona, correo, contraseña, estado) VALUES "
-                    + "(" + "'" + u.getPersona().getIdentificacion() + "'" + ","
-                    + "'" + u.getPersona().getIdentificacion() + "'" + ","
+                    = "insert into Usuario values ("
+                    + u.getPersona().getIdentificacion() + ","
+                    + u.getPersona().getIdentificacion() + ","
                     + "'" + u.getPersona().getCorreo() + "'" + ","
-                    + "'" + u.getContrasena() + "'" + ","
-                    + "'" + u.estadoToInt() + "'" + ")";
+                    + "'" + u.getContrasena()+ "'" + ","
+                    + u.estadoToInt() + ")";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);
@@ -67,7 +67,7 @@ public class UsuarioDB {
                     = "UPDATE Usuario SET "
                     + "correo = " + usuario.getCorreo()+ ","
                     + "contrasena = " + usuario.getContrasena()+ ","
-                    + "estado = " + usuario.estadoToInt()+","
+                    + "estado = " + usuario.isEstado() +","
                     + " WHERE id_usuario = " + usuario.getPersona().identificacion;
 
             accesoDatos.ejecutaSQL(strSQL);

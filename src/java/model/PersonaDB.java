@@ -32,18 +32,17 @@ public class PersonaDB {
             //Se obtienen los valores del objeto Departamento
             Persona p = new Persona();
             p = persona;
-
+            
             strSQL
-                    = "INSERT INTO Persona(id_persona, nombre, apellido1, apellido2, fecha_nacimiento, edad,correo) VALUES "
-                    + "(" + "'" + p.getIdentificacion() + "'" + ","
+                    = "insert into Persona values ("
+                    + p.getIdentificacion() + ","
                     + "'" + p.getNombre() + "'" + ","
                     + "'" + p.getApellido1() + "'" + ","
-                    + "'" + p.getApellido2() + "'" + ","
-                    + "'" + p.getFechaNacimiento() + "'" + ","
-                    + "'" + p.getEdad() + "'" + ")"
-                    + "'" + p.getCorreo() + "'" + ")";
-
-            //Se ejecuta la sentencia SQL
+                    + "'" + p.getApellido2()+ "'" + ","
+                    + null+ ","
+                    + null+ ","
+                    + "'" + p.getCorreo() + "')";
+            
             accesoDatos.ejecutaSQL(strSQL);
 
         } catch (SQLException e) {
@@ -53,5 +52,5 @@ public class PersonaDB {
         } finally {
 
         }
-    }
+    }    
 }
