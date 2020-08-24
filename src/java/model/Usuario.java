@@ -20,7 +20,6 @@ public class Usuario {
     }
     
     int estadoToInt(){
-        estado = false;
         if (estado) {
             return 1;
         }

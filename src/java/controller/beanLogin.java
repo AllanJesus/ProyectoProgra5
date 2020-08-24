@@ -11,14 +11,17 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+import javax.faces.context.FacesContext;
 import javax.jws.soap.SOAPBinding;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import model.PasswordGenerator;
+import model.PerfilDB;
 import model.Persona;
 import model.PersonaDB;
 import model.Usuario;
 import model.UsuarioDB;
+import model.UsuarioEstatico;
 
 /**
  *
@@ -66,8 +69,9 @@ public class beanLogin implements Serializable {
             mensajeError = "Campo de Contraseñas no debe estar en blanco";
             return mensajeError;
         }
+        
         mensajeError = "";
-        return "aMenuAspirante.xhtml";
+        return mensajeError;
     }
 
 ////////////////////////////Patrones para Validar Login////////////////////////////
@@ -116,11 +120,6 @@ public class beanLogin implements Serializable {
 
         if (validacionFormatoCorreo()) {
             mensajeError = "Debe escribir un correo valido";
-            return mensajeError;
-        }
-
-        if (!inserto) {
-            mensajeError = "Ya se encuentra registrado";
             return mensajeError;
         }
 
@@ -275,13 +274,13 @@ public class beanLogin implements Serializable {
 
 ////////////////////////////Insterts, updates////////////////////////////
     public String RegistrarPersona() throws SNMPExceptions, SQLException {
-        inserto = true;
         validarAutoRegistro();
         if (mensajeError.equals("")) {
             Persona p = new Persona();
             PersonaDB pDB = new PersonaDB();
             Usuario u = new Usuario();
             UsuarioDB uDB = new UsuarioDB();
+            PerfilDB perDB = new PerfilDB();
 
             p.setIdentificacion(Integer.parseInt(this.getIdentificacion()));
             p.setNombre(this.getNombre());
@@ -296,15 +295,42 @@ public class beanLogin implements Serializable {
             try {
                 pDB.RegistrarPersona(p);
                 uDB.RegistrarUsuario(u);
-                inserto = true;
+                perDB.InsertarPerfil(u);
                 return validarAutoRegistro();
             } catch (Exception e) {
-                inserto = false;
-                return validarAutoRegistro();
+                mensajeError = "Este usuario ya se encuentra registrado";
+                return mensajeError;
             }
         }
         return validarAutoRegistro();
+    }
 
+    public String Ingresar() throws SNMPExceptions, SQLException {
+        validacionLogin();
+        Usuario u;
+        UsuarioDB uDb = new UsuarioDB();
+
+        String enlace = "";
+
+        if (mensajeError.equals("")) {
+            u = uDb.selectUsuarioPorID(this.getIdentificacion());
+            try {
+            if (u.getContrasena().equals(this.getContrasena())) {
+                if (u.isEstado() == false) {
+                    UsuarioEstatico.setUsuario(u);
+                    enlace = "aRegistroConstrasena.xhtml";
+                    return enlace;
+                }
+
+            }
+
+        } catch (Exception e) {
+            mensajeError = "La identificacion o la contraseña esta mal, intentelo de nuevo";
+            return mensajeError;
+        }
+        }
+
+        return "No working";
     }
 
 ////////////////////////////Getters y Setters////////////////////////////
