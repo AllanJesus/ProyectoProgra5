@@ -8,6 +8,7 @@ package model;
 import dao.AccesoDatos;
 import dao.SNMPExceptions;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -32,8 +33,8 @@ public class PerfilDB {
             
             strSQL
                     = "insert into Usuario_Perfil values("
-                    + u.getPersona().getIdentificacion() + ","
-                    + "1" + ")";
+                    + u.getId_usuario() + ","
+                    + "2" + ")";
 
             //Se ejecuta la sentencia SQL
             accesoDatos.ejecutaSQL(strSQL);
@@ -46,5 +47,39 @@ public class PerfilDB {
 
         }
     }
-    
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public Perfil SeleccionarUsuario_PerfilPorID(String id) throws SNMPExceptions, 
+            SQLException {
+        
+        String select = "";
+        try {
+
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            select = "exec SP_SeleccionarUsuario_PerfilPorID " + id;
+
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+
+            if (rsPA.next()) {
+                Perfil per = new Perfil();
+                per.id_usuario = rsPA.getInt("id_usuario");
+                per.id_perfil = rsPA.getInt("id_perfil");
+
+                return per;
+            }
+
+            rsPA.close();
+
+            return null;
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION, e.getMessage());
+        } finally {
+
+        }
+    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 }
