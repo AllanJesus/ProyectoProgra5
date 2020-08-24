@@ -11,6 +11,7 @@ package model;
  */
 public class Usuario {
     
+    Persona persona;
     int id_persona;
     int id_usuario;
     String correo;
@@ -66,6 +67,14 @@ public class Usuario {
 
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
     
     
