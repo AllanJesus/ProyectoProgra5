@@ -5,63 +5,27 @@
  */
 package model;
 
-import java.sql.Date;
-
 /**
  *
  * @author kevin
  */
 public class Admision {
 
-    private int puntosAcciones;
-    private float nota;
-    private float promedio;
+    Persona persona;
+    float nota;
+    float promedio;
     boolean estado;
-    private int usuarioId;
-    private Date fecha;
-    
-    
-   // para detalle de los datos del aspirante
 
-     private int identificacion;
-     private String nombre;
-     private String apellido1;
-     private String apellido2;
-     private Date fechaNacimiento;
-     private int edad;
-     private String correo;
-     
- 
     public Admision() {
 
     }
 
-    public Admision(int identificacion, String nombre, String apellido1, String apellido2,float promedio) {
-        
-        this.identificacion = identificacion;
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.promedio = promedio;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public Admision(int identificacion, String nombre, String apellido1, String apellido2, Date fechaNacimiento, int edad, String correo ,float promedio) {
-        this.promedio = promedio;
-        this.identificacion = identificacion;
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.fechaNacimiento = fechaNacimiento;
-        this.edad = edad;
-        this.correo = correo;
-    }
-    
-    public int getPuntosAcciones() {
-        return puntosAcciones;
-    }
-
-    public void setPuntosAcciones(int puntosAcciones) {
-        this.puntosAcciones = puntosAcciones;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     public float getNota() {
@@ -87,80 +51,5 @@ public class Admision {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
-    public int getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(int identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido1() {
-        return apellido1;
-    }
-
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
-    }
-
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    
-
-    
 
 }
