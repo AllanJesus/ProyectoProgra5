@@ -14,74 +14,66 @@
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
         <link rel="stylesheet" type="text/css" href="css/style.css"></link>
         <link rel="stylesheet" type="text/css" href="css/Menu.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/style_1.css"></link>
     </h:head>
-    
-    <!-- Header -->
+
     <h:body>
         <h:form>
-            <div id="Header">
-                <ul>
-                    <li><a href="rMenuRegistro.xhtml">Inicio</a></li>
-                    <li><a href="" class="active">Consultar Solicitudes de Admision</a></li>                    
-                    <li><a href="rMantenimiento.xhtml">Mantenimiento Acciones Afirmativas</a></li>
-                    <li><a href="rReportes.xhtml">Reportes de Aspirantes</a></li>
-                    <li id="Salir"><a href="login.xhtml">Salir</a></li>
-                </ul>
-            </div>
-            <!-- /Header -->
-
-            <!-- Content -->
-            <div class="center_content">
-                <div style="margin-left:  90%;">
-                    <h:outputLabel value="Nombre Usuario"></h:outputLabel>
-                </div>
-                <br/>
-
-                <div >
-                    <h4 class="menuBanner">Consultar Solicitudes</h4>
-                </div>
+            
+            <div align="center" class="datagrid">
+               
+            <br/>
+            <br/>
+            <h:dataTable value = "#{beanAdmision.listaDetalleSolicitudes}" var="per">
+               
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="# Identificacion"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{per.identificacion}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{per.nombre}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Apellido 1"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{per.apellido1}"></h:outputText>
+                </h:column>
+                 
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Apellido 2"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{per.apellido2}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Promedio de Admision"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{per.promedio}"></h:outputText>
+                </h:column>
                 
-                 <div>
-                    <h:dataTable>
-
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Tipo Identidad"/>
-                            </f:facet>
-                            <h:outputText />
-                        </h:column>
-
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Identidad"/>
-                            </f:facet>
-                            <h:outputText />
-                        </h:column>
-
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText />
-                        </h:column>
-                        
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText />
-                        </h:column>
-
-                    </h:dataTable>
-                 </div>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Consultar detalle Aspirante"></h:outputText>
+                    </f:facet>
+                    <h:commandLink value="Consultar datos del Aspirante" actionListener="#{beanAdmision.mostrarDetalleAspirante(per)}" ></h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Estado"></h:outputText>
+                    </f:facet>
+                    <h:commandLink value="Cambiar Estado" ></h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Consultar de solicitudes de Admision" actionListener="#{beanAdmision.mostrarDetalleVotos(per)}"></h:commandButton>
             </div>
-            <!-- /Content -->
-
-            <!-- Footer -->
-             <!-- Prueba Commit -->
-            <!-- /Footer -->
         </h:form>
     </h:body>
 </html>
-
 
